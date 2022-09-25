@@ -66,6 +66,9 @@ img {
 	margin-right: 0.4em;
 	fill: var(--mainColor);
 }
+.kcal svg {
+	fill: rgb(255, 187, 61);
+}
 
 .difficulty,
 .diffMed,

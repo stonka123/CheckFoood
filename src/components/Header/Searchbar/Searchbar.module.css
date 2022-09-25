@@ -1,0 +1,17 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	margin: 1em;
+}
+
+.input {
+	width: 50%;
+	max-width: 400px;
+    
+}
+
+.button {
+	margin: 1em;
+}

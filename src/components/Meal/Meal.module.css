@@ -1,0 +1,93 @@
+.card {
+	position: relative;
+	display: flex;
+	flex-direction: row;
+	background-color: beige;
+	margin-top: 1em;
+	width: 90%;
+	height: 100px;
+	background-color: #fdfdfd;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+	border-radius: 8px;
+	max-width: 500px;
+}
+.bgc {
+	/* background-image: url(https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg); */
+	background-position: center;
+	background-size: cover;
+	margin: 0.5em;
+	border-radius: 8px;
+	width: 30%;
+}
+img {
+	width: 30%;
+	border-radius: 10px;
+	margin: 1em;
+}
+.content {
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+}
+.title {
+	margin: 0.2em;
+	font-size: 0.8rem;
+	font-weight: bold;
+}
+.options {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 100%;
+	font-size: 0.7rem;
+	padding: 0.2em;
+	margin: 0.2em;
+}
+.ratings,
+.kcal,
+.time {
+	padding: 0.2em;
+	display: flex;
+	margin: 0.2em;
+	justify-content: flex-start;
+	align-items: center;
+	height: 20px;
+}
+
+.kcal svg,
+.time svg {
+	margin-right: 0.4em;
+	fill: gray;
+	text-align: center;
+}
+.ratings svg {
+	margin-right: 0.4em;
+	fill: var(--mainColor);
+}
+
+.difficulty,
+.diffMed,
+.diffHard {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 0.5em 1em;
+	background-color: var(--mainColor);
+	border-radius: 10px 0 10px 0;
+	text-align: center;
+	align-self: flex-end;
+	color: #fff;
+	opacity: 0.8;
+	font-size: 0.7rem;
+}
+.diffMed {
+	background-color: rgb(247, 181, 59);
+}
+.diffHard {
+	background-color: rgb(255, 98, 98);
+}
+.btnShow {
+	font-size: 0.6rem;
+}

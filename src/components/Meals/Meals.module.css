@@ -1,0 +1,13 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	width: 100%;
+}
+.text {
+	font-weight: bold;
+	text-align: left;
+	align-self: flex-start;
+	margin-left: 1em;
+}

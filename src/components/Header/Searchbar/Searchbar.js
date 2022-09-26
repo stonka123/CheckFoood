@@ -1,6 +1,7 @@
 import styles from './Searchbar.module.css'
 import { useState } from 'react'
 import PropTypes from 'prop-types'
+import ThemeContext from '../../../context/themeContext'
 
 function Searchbar(props) {
 	const [term, setTerm] = useState('')
@@ -9,9 +10,6 @@ function Searchbar(props) {
 		props.onSearch(term)
 	}
 
-	const updateTerm = e => {
-		setTerm(e.target.value)
-	}
 	return (
 		<div className={`input-group-sm ${styles.container}`}>
 			<input
@@ -22,17 +20,17 @@ function Searchbar(props) {
 				className={`form-control ${styles.input}`}
 				type='text'
 				placeholder='Znajdź przepis...'
+				onKeyDown={e => (e.key === 'Enter' ? search(term) : null)}
 			/>
-			<button onClick={search} className={`btn btn-outline-dark ${styles.button}`}>
-				{' '}
-				Szukaj
-			</button>
+			<ThemeContext.Consumer>
+				{value => (
+					<button onClick={search} className={`btn btn-outline-dark ${styles.button}`}>
+						Szukaj
+					</button>
+				)}
+			</ThemeContext.Consumer>
 		</div>
 	)
 }
-
-// Searchbar.PropTypes = {
-// 	onSearch: PropTypes.func.isRequired,
-// }
 
 export default Searchbar

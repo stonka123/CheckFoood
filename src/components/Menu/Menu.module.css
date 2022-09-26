@@ -1,0 +1,17 @@
+ul {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 100%;
+}
+li {
+	list-style: none;
+}
+a {
+	background-color: var(--mainColor);
+	color: #fff;
+	padding: 1em;
+	margin: 1em;
+	border-radius: 38px 0 18px 0;
+	text-decoration: none;
+}

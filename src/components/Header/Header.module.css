@@ -9,7 +9,13 @@
 		rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
 	border-radius: 50%;
 	cursor: pointer;
+	background-color: #fff;
 }
+
+.icon-dark {
+	color: red;
+}
+
 .icon svg {
 	height: 20px;
 	width: 20px;
@@ -20,6 +26,11 @@
 	margin: auto;
 	text-transform: uppercase;
 	font-size: 25px;
+}
+.subtitle {
+	text-align: center;
+	opacity: 0.7;
+	font-style: italic;
 }
 .text span {
 	font-weight: bold;

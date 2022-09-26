@@ -5,6 +5,11 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	width: 100%;
+	background-color: #ffffff;
+	overflow: hidden;
+}
+.body-dark {
+	background-color: #333;
 }
 
 code {

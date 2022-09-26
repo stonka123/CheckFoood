@@ -1,20 +1,24 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './Header.module.css'
 import Searchbar from './Searchbar/Searchbar'
 import ThemeContext from '../../context/themeContext'
 
 const Header = props => {
-	const changeTheme = () => {
-		const body = document.getElementsByTagName('body')
-		body[0].classList.toggle('body-dark')
-	}
+	const changeTheme = () => {}
+	const theme = useContext(ThemeContext)
 
 	return (
 		<ThemeContext.Consumer>
 			{value => (
 				<div>
-					<div className='d-flex justify-content-between m-a p-2 container' style={{ backgroundColor: `${value}` }}>
-						<div className={styles.icon}>
+					<div
+						className={
+							theme === 'light'
+								? `d-flex justify-content-between m-a p-2 container bgc-dark icon-dark`
+								: `d-flex justify-content-between m-a p-2 container`
+						}
+						style={{ backgroundColor: `${value}` }}>
+						<div className={theme === 'light' ? `${styles.icon} icon-dark` : `${styles.icon}`}>
 							<svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 16 16'>
 								<path d='M9.5 0a.5.5 0 0 1 .5.5.5.5 0 0 0 .5.5.5.5 0 0 1 .5.5V2a.5.5 0 0 1-.5.5h-5A.5.5 0 0 1 5 2v-.5a.5.5 0 0 1 .5-.5.5.5 0 0 0 .5-.5.5.5 0 0 1 .5-.5h3Z' />
 								<path d='M3 2.5a.5.5 0 0 1 .5-.5H4a.5.5 0 0 0 0-1h-.5A1.5 1.5 0 0 0 2 2.5v12A1.5 1.5 0 0 0 3.5 16h9a1.5 1.5 0 0 0 1.5-1.5v-12A1.5 1.5 0 0 0 12.5 1H12a.5.5 0 0 0 0 1h.5a.5.5 0 0 1 .5.5v12a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-12Z' />

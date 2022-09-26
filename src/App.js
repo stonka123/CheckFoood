@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import './App.css'
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
 import Menu from './components/Menu/Menu'
@@ -7,6 +6,7 @@ import Meals from './components/Meals/Meals'
 import LoadingBar from './components/UI/LoadingBar/LoadingBar'
 import ThemeContext from './context/themeContext'
 import { dataMeals } from './data/dataMeals'
+import './App.css'
 
 function App() {
 	const [state, setState] = useState({
@@ -29,7 +29,7 @@ function App() {
 
 	return (
 		<div className='App container'>
-			<ThemeContext.Provider value=''>
+			<ThemeContext.Provider value='light'>
 				<Header onSearch={term => searchHandler(term)} />
 				<Menu />
 				{state.loading ? <LoadingBar /> : <Meals meals={state.meals} />}

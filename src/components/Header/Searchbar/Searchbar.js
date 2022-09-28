@@ -1,30 +1,40 @@
 import styles from './Searchbar.module.css'
-import { useState } from 'react'
+import { useState, useContext, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import ThemeContext from '../../../context/themeContext'
-
+import ThemeContext from '../../../context/ThemeContext'
 function Searchbar(props) {
 	const [term, setTerm] = useState('')
+	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
 
 	const search = () => {
 		props.onSearch(term)
 	}
 
+	const inputRef = useRef(null)
+
+	const focusInput = () => {
+		inputRef.current.focus()
+	}
+	useEffect(() => {
+		focusInput()
+	}, [])
+
 	return (
-		<div className={`input-group-sm ${styles.container}`}>
+		<div className={styles.container}>
 			<input
+				ref={inputRef}
 				value={term}
 				onChange={e => {
 					setTerm(e.target.value)
 				}}
-				className={`form-control ${styles.input}`}
+				className={styles.input}
 				type='text'
 				placeholder='Znajdź przepis...'
 				onKeyDown={e => (e.key === 'Enter' ? search(term) : null)}
 			/>
 			<ThemeContext.Consumer>
 				{value => (
-					<button onClick={search} className={`btn btn-outline-dark ${styles.button}`}>
+					<button onClick={search} className={styles.button}>
 						Szukaj
 					</button>
 				)}

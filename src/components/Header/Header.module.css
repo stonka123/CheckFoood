@@ -1,3 +1,11 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1em;
+	width: 100%;
+}
+
 .icon {
 	color: var(--mainColor);
 	width: 40px;
@@ -10,6 +18,12 @@
 	border-radius: 50%;
 	cursor: pointer;
 	background-color: #fff;
+	transition: background-color 0.35s, color 0.35s;
+}
+
+.icon:hover {
+	background-color: var(--mainColor);
+	color: azure;
 }
 
 .icon-dark {

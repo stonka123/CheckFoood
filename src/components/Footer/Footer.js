@@ -1,11 +1,16 @@
 import styles from './Footer.module.css'
 
-function Footer() {
+import ThemeContext from '../../context/ThemeContext'
+import { useContext } from 'react'
+
+function Footer(props) {
+	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
+
 	return (
 		<div className={styles.footer}>
 			<div className={styles.footerText}>
-				<span>check</span>
-				<p>FOOD</p>
+				<span>check </span>
+				<p>FOOD © </p>
 				{new Date().getFullYear()}
 			</div>
 		</div>

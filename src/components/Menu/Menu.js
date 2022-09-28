@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Menu.module.css'
 function Menu() {
 	return (
-		<div>
+		<div className={styles.container}>
 			<ul>
 				<li>
 					<a href='#'>Przepisy</a>
@@ -11,6 +11,8 @@ function Menu() {
 					<a href='#'>Zaloguj</a>
 				</li>
 			</ul>
+			
+		
 		</div>
 	)
 }

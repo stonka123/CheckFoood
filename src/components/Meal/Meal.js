@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import styles from './Meal.module.css'
+import ThemeContext from '../../context/ThemeContext'
 
 function Meal(props) {
 	const checkDifficultySkill = () => {
@@ -57,9 +58,13 @@ function Meal(props) {
 						<span> {props.time}</span>
 					</div>
 				</div>
-				<div className={styles.bottom}>
-					<button className={`btn btn-secondary m-1 ${styles.btnShow}`}>Pokaż</button>
-				</div>
+				<ThemeContext.Consumer>
+					{value => (
+						<div className={styles.bottom}>
+							<button className={`btn btn-secondary m-1 ${styles.btnShow} text-${value}`}>Pokaż</button>
+						</div>
+					)}
+				</ThemeContext.Consumer>
 				{checkDifficultySkill()}
 			</div>
 		</div>

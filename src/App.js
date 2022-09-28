@@ -5,14 +5,14 @@ import Header from './components/Header/Header'
 import Menu from './components/Menu/Menu'
 import Meals from './components/Meals/Meals'
 import LoadingBar from './components/UI/LoadingBar/LoadingBar'
-import ThemeContext from './context/themeContext'
+import ThemeContext from './context/ThemeContext'
 import { dataMeals } from './data/dataMeals'
+import { themeLight, themeDark } from './context/Theme'
 
 function App() {
 	const [state, setState] = useState({
 		meals: [],
 		loading: true,
-		theme: 'light',
 	})
 
 	useEffect(() => {
@@ -27,10 +27,17 @@ function App() {
 		setState({ meals })
 	}
 
+	const [isDarkMode, setIsDarkMode] = useState(false)
+
+	const changeTheme = () => {
+		const body = document.getElementsByTagName('body')
+		body[0].classList.toggle('body-dark')
+		setIsDarkMode(!isDarkMode)
+	}
 	return (
 		<div className='App container'>
-			<ThemeContext.Provider value=''>
-				<Header onSearch={term => searchHandler(term)} />
+			<ThemeContext.Provider value={{ themeLight, themeDark, isDarkMode }}>
+				<Header onSearch={term => searchHandler(term)} changeTheme={changeTheme} />
 				<Menu />
 				{state.loading ? <LoadingBar /> : <Meals meals={state.meals} />}
 				<Footer />

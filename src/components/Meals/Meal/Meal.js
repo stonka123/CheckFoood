@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types'
 import React, { useState } from 'react'
 import styles from './Meal.module.css'
-import ThemeContext from '../../context/ThemeContext'
+import ThemeContext from '../../../context/ThemeContext'
+import { Link } from 'react-router-dom'
 
 function Meal(props) {
 	const checkDifficultySkill = () => {
@@ -61,7 +62,12 @@ function Meal(props) {
 				<ThemeContext.Consumer>
 					{value => (
 						<div className={styles.bottom}>
-							<button className={`btn btn-secondary m-1 ${styles.btnShow} text-${value}`}>Pokaż</button>
+							<Link to={`/przepisy/${props.id}`} className={`btn btn-secondary m-1 ${styles.btnShow} text-${value}`}>
+								Pokaż
+							</Link>
+							{/* <a href='/meals/id' className={`btn btn-secondary m-1 ${styles.btnShow} text-${value}`}>
+								Pokaż
+							</a> */}
 						</div>
 					)}
 				</ThemeContext.Consumer>

@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import PropTypes from 'prop-types'
-import Meal from '../Meal/Meal'
+import Meal from './Meal/Meal'
 import styles from './Meals.module.css'
 import ThemeContext from '../../context/ThemeContext'
 

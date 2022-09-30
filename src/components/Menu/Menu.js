@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import styles from './Menu.module.css'
 import AuthContext from '../../context/authContext'
-import { Link } from 'react-router-dom'
+import { Link, NavLink, Outlet } from 'react-router-dom'
 
 function Menu() {
 	const auth = useContext(AuthContext)
@@ -14,17 +14,30 @@ function Menu() {
 		e.preventDefault()
 		auth.logout()
 	}
+	let activeStyle = {
+		backgroundColor: 'white',
+		color: 'var(--mainColor)',
+	}
+	let activeClassName = 'underline'
 	return (
 		<div className={styles.container}>
 			<ul>
 				<li>
-					<Link to='/'>Przepisy</Link>
+					<NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} to='/' end>
+						Strona główna
+					</NavLink>
 				</li>
 				<li>
 					{auth.isAuthenticated ? (
-						<a onClick={logout} href='#'>
-							Wyloguj
-						</a>
+						<>
+							<a onClick={logout} href='#'>
+								Wyloguj
+							</a>
+
+							<NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} to='/profil'>
+								Profil
+							</NavLink>
+						</>
 					) : (
 						<a onClick={login} href='#'>
 							Zaloguj

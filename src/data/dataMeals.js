@@ -19,7 +19,7 @@ export const dataMeals = [
 	},
 	{
 		id: 3,
-		title: 'Omlet z banem',
+		title: 'Omlet z bananem',
 		rating: 4.1,
 		calories: 280,
 		time: '1:15',

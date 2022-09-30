@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes, Outlet, Navigate } from 'react-router-dom'
 import './App.css'
 import Footer from './components/Footer/Footer'
 import Header from './components/Header/Header'
@@ -10,7 +10,12 @@ import ThemeContext from './context/ThemeContext'
 import { dataMeals } from './data/dataMeals'
 import { themeLight, themeDark } from './context/Theme'
 import AuthContext from './context/authContext'
+// PAGES
 import Hotel from './pages/Hotel/Hotel'
+import Search from './pages/Search/Search'
+import Profile from '../src/pages/Profile/Profile'
+import NotFound from './pages/404/NotFound'
+import Login from './pages/Auth/Login/Login'
 
 function App() {
 	const [meals, setMeals] = useState([])
@@ -25,10 +30,10 @@ function App() {
 		}, 1000)
 	}, [])
 
-	const searchHandler = term => {
-		const newMeals = [...dataMeals].filter(x => x.title.toLowerCase().includes(term.toLowerCase()))
-		setMeals(newMeals)
-	}
+	// const searchHandler = term => {
+	// 	const newMeals = [...dataMeals].filter(x => x.title.toLowerCase().includes(term.toLowerCase()))
+	// 	setMeals(newMeals)
+	// }
 
 	const changeTheme = () => {
 		const body = document.getElementsByTagName('body')
@@ -39,7 +44,12 @@ function App() {
 		<>
 			<Routes>
 				<Route path='/przepisy/:id' element={<Hotel />} />
-				<Route path='/' element={loading ? <LoadingBar /> : <Meals meals={meals} />} />
+				<Route path='/wyszukaj/:term' element={<Search />} />
+				<Route path='/wyszukaj/' element={<Search />} />
+				<Route path='/profil/*' element={isAuthenticated ? <Profile /> : <Navigate to='/zaloguj' />} />
+				<Route path='/zaloguj/*' element={<Login />} />
+				<Route path='/' element={loading ? <LoadingBar /> : <Meals meals={meals} />} end />
+				<Route path='*' element={<NotFound />} />
 			</Routes>
 		</>
 	)
@@ -54,7 +64,7 @@ function App() {
 				}}>
 				<ThemeContext.Provider value={{ themeLight, themeDark, isDarkMode }}>
 					<div className='App container'>
-						<Header onSearch={term => searchHandler(term)} changeTheme={changeTheme} />
+						<Header changeTheme={changeTheme} />
 						<Menu />
 						{content}
 
@@ -67,3 +77,5 @@ function App() {
 }
 
 export default App
+
+// 9.13

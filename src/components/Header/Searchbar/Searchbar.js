@@ -2,12 +2,15 @@ import styles from './Searchbar.module.css'
 import { useState, useContext, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ThemeContext from '../../../context/ThemeContext'
+import { useNavigate } from 'react-router-dom'
+
 function Searchbar(props) {
 	const [term, setTerm] = useState('')
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
-
+	const history = useNavigate()
 	const search = () => {
-		props.onSearch(term)
+		// props.onSearch(term)
+		history(`/wyszukaj/${term}`)
 	}
 
 	const inputRef = useRef(null)

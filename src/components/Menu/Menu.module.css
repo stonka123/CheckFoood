@@ -32,3 +32,6 @@ a:hover {
 	background-color: #fff;
 	color: var(--mainColor);
 }
+.menuItemActive {
+	background-color: red;
+}

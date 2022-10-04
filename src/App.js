@@ -36,10 +36,10 @@ function App() {
 		}, 1000)
 	}, [])
 
-	// const searchHandler = term => {
-	// 	const newMeals = [...dataMeals].filter(x => x.title.toLowerCase().includes(term.toLowerCase()))
-	// 	setMeals(newMeals)
-	// }
+	const searchHandler = term => {
+		const newMeals = [...dataMeals].filter(x => x.title.toLowerCase().includes(term.toLowerCase()))
+		setMeals(newMeals)
+	}
 
 	const changeTheme = () => {
 		const body = document.getElementsByTagName('body')
@@ -72,7 +72,7 @@ function App() {
 				}}>
 				<ThemeContext.Provider value={{ themeLight, themeDark, isDarkMode }}>
 					<div className='App container'>
-						<Header changeTheme={changeTheme} />
+						<Header changeTheme={changeTheme} onSearch={term => searchHandler(term)} />
 						<Menu />
 
 						{content}

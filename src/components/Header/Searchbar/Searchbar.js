@@ -9,8 +9,8 @@ function Searchbar(props) {
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
 	const history = useNavigate()
 	const search = () => {
-		// props.onSearch(term)
-		history(`/wyszukaj/${term}`)
+		props.onSearch(term)
+		// history(`/wyszukaj/${term}`)
 	}
 
 	const inputRef = useRef(null)

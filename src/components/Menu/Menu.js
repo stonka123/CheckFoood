@@ -39,9 +39,12 @@ function Menu() {
 							</NavLink>
 						</>
 					) : (
-						<a onClick={login} href='#'>
-							Zaloguj
-						</a>
+						<>
+							<NavLink to='/rejestracja'>Zarejestruj</NavLink>
+							<a onClick={login} href='#'>
+								Zaloguj
+							</a>
+						</>
 					)}
 				</li>
 			</ul>

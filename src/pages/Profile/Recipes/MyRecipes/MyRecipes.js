@@ -1,11 +1,14 @@
 import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import axios from '../../../../axios'
 
 function MyRecipes() {
 	return (
 		<div>
 			<p>Nie masz jeszcze żadnego przepisu</p>
-			<button className='btn btn-primary'>Dodaj przepis</button>
+			<Link to='/profil/ulubione/dodaj' className='btn btn-primary'>
+				Dodaj przepis
+			</Link>
 		</div>
 	)
 }

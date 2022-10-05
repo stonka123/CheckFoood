@@ -10,24 +10,26 @@
 	width: 50%;
 	max-width: 400px;
 	padding: 0.5em 0.7em;
-	border-radius: 15px 0 15px 0;
-	border: 1px solid var(--mainColor);
+	border-radius: 15px;
+	font-size: 1rem;
+	border: 2px solid var(--mainColor);
 }
 .input:focus {
 	border: 2px solid var(--mainColor);
 	outline: none;
-	border-radius: 15px 0 15px 0;
 }
 
 .button {
-	background: #fff;
+	background: var(--mainColor);
 	border: 2px solid var(--mainColor);
-	padding: 0.5em 0.7em;
+	padding: 0.7em 1em;
+	border-radius: 14px;
 	margin: 1em;
-	color: gray;
+	color: #fff;
+	cursor: pointer;
 	transition: background-color 0.35s, color 0.35s;
 }
 .button:hover {
-	background-color: var(--mainColor);
-	color: azure;
+	background-color: #fff;
+	color: var(--mainColor);
 }

@@ -1,7 +1,8 @@
 import LoadingBar from '../../../../../components/UI/LoadingBar/LoadingBar'
-import { useState, useRef } from 'react'
+import { useState, useRef, createElement } from 'react'
 import axios from '../../../../../axios'
 import { useNavigate } from 'react-router-dom'
+import Meals from '../../../../../components/Meals/Meals'
 
 function AddRecipe(props) {
 	const history = useNavigate()
@@ -13,26 +14,17 @@ function AddRecipe(props) {
 		image: null,
 	})
 	const [loading, setLoading] = useState(false)
-	const submit = async e => {
+	const submit = e => {
 		e.preventDefault()
 
-		try {
-			await axios.post('/meals.json', {
-				name: form.name,
-				composition: form.composition,
-				difficulty: form.difficulty,
-			})
-			history('/profil/ulubione')
-		} catch (ex) {
-			console.log(ex.response)
-		}
+		console.log(form)
 	}
 
 	return (
 		<div className='card'>
 			<div className='card-header'>Nowy Przepis</div>
 			<div className='card-body'>
-				<form onSubmit={submit}>
+				<form>
 					<div className='form-group'>
 						<label>Nazwa</label>
 						<input
@@ -76,7 +68,9 @@ function AddRecipe(props) {
 					</div>
 
 					<div className='text-end mt-3'>
-						<button className='btn btn-success'>Dodaj przepis!</button>
+						<button onClick={submit} className='btn btn-success'>
+							Dodaj przepis!
+						</button>
 					</div>
 				</form>
 			</div>

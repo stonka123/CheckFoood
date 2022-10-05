@@ -17,22 +17,22 @@ function Menu() {
 	let activeStyle = {
 		backgroundColor: 'white',
 		color: 'var(--mainColor)',
+		borderRadius: '10px',
 	}
 	let activeClassName = 'underline'
 	return (
 		<div className={styles.container}>
 			<ul>
-				<li>
+				<li className={styles.containerMenu}>
 					<NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} to='/' end>
 						Strona główna
 					</NavLink>
-				</li>
-				<li>
+
 					{auth.isAuthenticated ? (
 						<>
-							<a onClick={logout} href='#'>
+							<NavLink onClick={logout} to='/wylogowano'>
 								Wyloguj
-							</a>
+							</NavLink>
 
 							<NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} to='/profil'>
 								Profil
@@ -40,7 +40,6 @@ function Menu() {
 						</>
 					) : (
 						<>
-							<NavLink to='/rejestracja'>Zarejestruj</NavLink>
 							<a onClick={login} href='#'>
 								Zaloguj
 							</a>

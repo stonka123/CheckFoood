@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route, Link, Outlet, NavLink, useMatch } from 'react-router-dom'
-import ProfilDetails from './Recipes/ProfilDetails/ProfilDetails'
+
 import MyRecipes from './Recipes/MyRecipes/MyRecipes'
 
 function Profile(props) {
@@ -12,11 +12,7 @@ function Profile(props) {
 
 			<div className='card-body'>
 				<ul className='nav nav-tabs'>
-					<li className='nav-item '>
-						<NavLink className='nav-link' to='/profil' end>
-							Profil
-						</NavLink>
-					</li>
+					
 					<li className='nav-item'>
 						<NavLink className='nav-link' to='/profil/ulubione'>
 							Przepisy
@@ -26,8 +22,6 @@ function Profile(props) {
 				</ul>
 				<div className='pt-4'>
 					<Routes>
-						<Route path='/' element={<ProfilDetails />} />
-						<Route path='/profil' element={<ProfilDetails />} />
 						<Route path='/ulubione' element={<MyRecipes />} />
 					</Routes>
 				</div>

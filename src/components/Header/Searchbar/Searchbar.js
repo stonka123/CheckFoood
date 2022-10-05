@@ -10,7 +10,6 @@ function Searchbar(props) {
 	const history = useNavigate()
 	const search = () => {
 		props.onSearch(term)
-		// history(`/wyszukaj/${term}`)
 	}
 
 	const inputRef = useRef(null)

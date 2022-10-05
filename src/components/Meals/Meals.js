@@ -8,15 +8,17 @@ function Meals(props) {
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
 
 	return (
-		<div className={styles.container}>
-			<p
-				className={styles.text}
-				style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
-				Przepisy:
-			</p>
-			{props.meals.map(meal => (
-				<Meal key={meal.id} {...meal} theme={props.theme} />
-			))}
+		<div className={styles.wrapper}>
+			<div className={styles.containerMeals}>
+				<p
+					className={styles.text}
+					style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
+					Przepisy:
+				</p>
+				{props.meals.map(meal => (
+					<Meal key={meal.id} {...meal} theme={props.theme} />
+				))}
+			</div>
 		</div>
 	)
 }

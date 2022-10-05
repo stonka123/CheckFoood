@@ -10,6 +10,7 @@ import ThemeContext from './context/ThemeContext'
 import { dataMeals } from './data/dataMeals'
 import { themeLight, themeDark } from './context/Theme'
 import AuthContext from './context/authContext'
+
 // PAGES
 import Hotel from './pages/Hotel/Hotel'
 import Search from './pages/Search/Search'
@@ -46,15 +47,17 @@ function App() {
 		body[0].classList.toggle('body-dark')
 		setIsDarkMode(!isDarkMode)
 	}
+
+	const addRecipe = text => {
+		console.log(text)
+	}
+
 	const content = (
 		<>
 			<Routes>
 				<Route path='/przepisy/:id' element={<Hotel />} />
-				<Route path='profil/ulubione/dodaj' element={<AddRecipe />} />
-				<Route path='/wyszukaj/:term' element={<Search />} />
-				<Route path='/wyszukaj/' element={<Search />} />
+				<Route path='profil/ulubione/dodaj' element={isAuthenticated ? <AddRecipe /> : <p>zaloguj sie!</p>} />
 				<Route path='/profil/*' element={isAuthenticated ? <Profile /> : <Navigate to='/zaloguj' />} />
-				<Route path='/zaloguj/*' element={<Login />} />
 				<Route path='/rejestracja/*' element={<Register />} />
 				<Route path='/' element={loading ? <LoadingBar /> : <Meals meals={meals} />} end />
 				<Route path='*' element={<NotFound />} />
@@ -71,7 +74,7 @@ function App() {
 					logout: () => setIsAuthenticated(false),
 				}}>
 				<ThemeContext.Provider value={{ themeLight, themeDark, isDarkMode }}>
-					<div className='App container'>
+					<div className='App'>
 						<Header changeTheme={changeTheme} onSearch={term => searchHandler(term)} />
 						<Menu />
 

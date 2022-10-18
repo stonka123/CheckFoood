@@ -3,10 +3,16 @@ import PropTypes from 'prop-types'
 import Meal from './Meal/Meal'
 import styles from './Meals.module.css'
 import ThemeContext from '../../context/ThemeContext'
+import { addRecipe } from '../../pages/Profile/Recipes/MyRecipes/AddRecipe/AddRecipe'
+import { addRecipeContext } from '../../context/addRecipeContext'
 
 function Meals(props) {
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
 
+
+
+
+	
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.containerMeals}>

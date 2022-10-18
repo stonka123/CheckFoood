@@ -1,10 +1,11 @@
 import React from 'react'
+import styles from './NotFound.module.css'
 
 function NotFound(props) {
 	return (
-		<div>
-			<h2>404</h2>
-			<h2>Nie znaleziono takiej strony.</h2>
+		<div className={styles.container}>
+			<p>404</p>
+			<p>Nie znaleziono takiej strony.</p>
 		</div>
 	)
 }

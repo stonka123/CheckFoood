@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styles from './Meal.module.css'
 import ThemeContext from '../../../context/ThemeContext'
 import { Link } from 'react-router-dom'
@@ -62,7 +62,10 @@ function Meal(props) {
 				<ThemeContext.Consumer>
 					{value => (
 						<div className={styles.bottom}>
-							<Link to={`/przepisy/${props.id}`} className={`btn btn-secondary m-1 ${styles.btnShow} text-${value}`}>
+							<Link
+								
+								to={`/przepisy/${props.id}`}
+								className={`btn btn-secondary m-1 ${styles.btnShow} text-${value}`}>
 								Pokaż
 							</Link>
 							{/* <a href='/meals/id' className={`btn btn-secondary m-1 ${styles.btnShow} text-${value}`}>

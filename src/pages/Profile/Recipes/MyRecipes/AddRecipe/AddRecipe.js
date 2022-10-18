@@ -1,23 +1,24 @@
 import LoadingBar from '../../../../../components/UI/LoadingBar/LoadingBar'
-import { useState, useRef, createElement } from 'react'
+import { useState, useRef, createElement, createContext, useContext } from 'react'
 import axios from '../../../../../axios'
 import { useNavigate } from 'react-router-dom'
 import Meals from '../../../../../components/Meals/Meals'
+import Meal from '../../../../../components/Meals/Meal/Meal'
 
 function AddRecipe(props) {
 	const history = useNavigate()
 	const imageRef = useRef()
+
 	const [form, setForm] = useState({
-		name: '',
+		title: '',
 		composition: '',
 		difficulty: 'Easy',
 		image: null,
 	})
 	const [loading, setLoading] = useState(false)
+
 	const submit = e => {
 		e.preventDefault()
-
-		console.log(form)
 	}
 
 	return (
@@ -30,7 +31,7 @@ function AddRecipe(props) {
 						<input
 							required
 							value={form.name}
-							onChange={e => setForm({ ...form, name: e.target.value })}
+							onChange={e => setForm({ ...form, title: e.target.value })}
 							type='text'
 							className='form-control'
 						/>

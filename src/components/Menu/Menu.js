@@ -30,12 +30,11 @@ function Menu() {
 
 					{auth.isAuthenticated ? (
 						<>
-							<NavLink onClick={logout} to='/wylogowano'>
-								Wyloguj
-							</NavLink>
-
 							<NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} to='/profil'>
 								Profil
+							</NavLink>
+							<NavLink onClick={logout} to='/wylogowano'>
+								Wyloguj
 							</NavLink>
 						</>
 					) : (

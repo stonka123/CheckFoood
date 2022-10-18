@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { BrowserRouter as Router, Route, Routes, Outlet, Navigate } from 'react-router-dom'
 import './App.css'
 import Footer from './components/Footer/Footer'
@@ -10,9 +10,10 @@ import ThemeContext from './context/ThemeContext'
 import { dataMeals } from './data/dataMeals'
 import { themeLight, themeDark } from './context/Theme'
 import AuthContext from './context/authContext'
+import { addRecipeContext } from './context/addRecipeContext'
 
 // PAGES
-import Hotel from './pages/Hotel/Hotel'
+import ShowMeal from './pages/ShowMeal/ShowMeal'
 import Search from './pages/Search/Search'
 import NotFound from './pages/404/NotFound'
 import Login from './pages/Auth/Login/Login'
@@ -47,15 +48,11 @@ function App() {
 		body[0].classList.toggle('body-dark')
 		setIsDarkMode(!isDarkMode)
 	}
-
-	const addRecipe = text => {
-		console.log(text)
-	}
-
+	const title = useContext(addRecipeContext)
 	const content = (
 		<>
 			<Routes>
-				<Route path='/przepisy/:id' element={<Hotel />} />
+				<Route path='/przepisy/:id' element={<ShowMeal meals={meals} />} />
 				<Route path='profil/ulubione/dodaj' element={isAuthenticated ? <AddRecipe /> : <p>zaloguj sie!</p>} />
 				<Route path='/profil/*' element={isAuthenticated ? <Profile /> : <Navigate to='/zaloguj' />} />
 				<Route path='/rejestracja/*' element={<Register />} />
@@ -67,23 +64,25 @@ function App() {
 
 	return (
 		<Router>
-			<AuthContext.Provider
-				value={{
-					isAuthenticated: isAuthenticated,
-					login: () => setIsAuthenticated(true),
-					logout: () => setIsAuthenticated(false),
-				}}>
-				<ThemeContext.Provider value={{ themeLight, themeDark, isDarkMode }}>
-					<div className='App'>
-						<Header changeTheme={changeTheme} onSearch={term => searchHandler(term)} />
-						<Menu />
+			<addRecipeContext.Provider value={meals}>
+				<AuthContext.Provider
+					value={{
+						isAuthenticated: isAuthenticated,
+						login: () => setIsAuthenticated(true),
+						logout: () => setIsAuthenticated(false),
+					}}>
+					<ThemeContext.Provider value={{ themeLight, themeDark, isDarkMode }}>
+						<div className='App'>
+							<Header changeTheme={changeTheme} onSearch={term => searchHandler(term)} />
+							<Menu />
 
-						{content}
+							{content}
 
-						<Footer />
-					</div>
-				</ThemeContext.Provider>
-			</AuthContext.Provider>
+							<Footer />
+						</div>
+					</ThemeContext.Provider>
+				</AuthContext.Provider>
+			</addRecipeContext.Provider>
 		</Router>
 	)
 }

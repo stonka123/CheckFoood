@@ -1,15 +1,15 @@
 body {
-	
 	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
 		'Droid Sans', 'Helvetica Neue', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	width: 100%;
 	background-color: #ffffff;
-	overflow: hidden;
+	/* overflow-x: hidden; */
 	margin: 0 auto;
 	max-width: 1200px;
 }
+
 .body-dark {
 	background-color: #333;
 }
@@ -19,4 +19,8 @@ body {
 
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+.App {
+	position: relative;
+	overflow: hidden;
 }

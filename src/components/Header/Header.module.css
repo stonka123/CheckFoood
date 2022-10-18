@@ -1,10 +1,11 @@
 .container {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-around;
 	width: 100%;
 	margin: 0 auto;
 }
+
 .wrapper {
 	padding: 1em;
 }
@@ -51,4 +52,12 @@
 .text span {
 	font-weight: bold;
 	color: var(--mainColor);
+}
+.add-recipe {
+	background-color: transparent;
+	border: none;
+	padding: 0;
+}
+.add-recipe:hover {
+	background-color: transparent;
 }

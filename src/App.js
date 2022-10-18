@@ -75,9 +75,7 @@ function App() {
 						<div className='App'>
 							<Header changeTheme={changeTheme} onSearch={term => searchHandler(term)} />
 							<Menu />
-
 							{content}
-
 							<Footer />
 						</div>
 					</ThemeContext.Provider>

@@ -1,38 +1,36 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import LoadingBar from '../../components/UI/LoadingBar/LoadingBar'
 import useWebsiteTitle from '../../context/useWebsiteTitle'
 import { addRecipeContext } from '../../context/addRecipeContext'
 
 export default function ShowMeal(props) {
-	const title = useContext(addRecipeContext)
+	const data = useContext(addRecipeContext)
 	const { id } = useParams()
-	console.log(title)
-	// console.log(id)
-	const [meal, setMeal] = useState({})
-	const [loading, setLoading] = useState(true)
 	const setTitle = useWebsiteTitle()
-	const fetchMeal = () => {
-		setMeal({
-			id: 1,
-			title: 'Łosoś po norweskuu',
-			rating: 4.2,
-			calories: 150,
-			time: '5:30',
-			difficulty: 'Hard',
-			img: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg',
-		})
+	const [loading, setLoading] = useState(true)
 
-		setTitle('Łosoś po norwesku')
+	const [meal, setMeal] = useState({})
+
+	const findRecipe = () => {
+		setMeal(data.find(product => String(product.id) === id))
 		setLoading(false)
+		setTitle('test')
 	}
+	console.log(meal)
 
 	useEffect(() => {
-		setTimeout(() => {
-			fetchMeal()
-		}, 500)
-	}, [])
+		findRecipe()
+	}, [id])
 
 	if (loading) return <LoadingBar />
-	return <h1>Przepis na: {meal.title}</h1>
+	return (
+		<div>
+			<Link to='/'> Wróć</Link>
+			<img src={meal.img} />
+			<p>Numer przepisu id to : {meal.id}</p>
+			<p>Ocena przepisu to: {meal.rating}</p>
+			<h1>Przepis na: {meal.title}</h1>
+		</div>
+	)
 }

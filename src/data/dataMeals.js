@@ -28,7 +28,7 @@ export const dataMeals = [
 	},
 	{
 		id: 3,
-		title: 'Chleb po swojsku',
+		title: 'Chleb po swojsku test skonczony',
 		rating: 3.4,
 		calories: 420,
 		time: '2:25',

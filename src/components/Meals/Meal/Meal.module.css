@@ -55,6 +55,7 @@ img {
 	justify-content: flex-start;
 	align-items: center;
 	height: 20px;
+	font-weight: bold;
 }
 
 .kcal svg,

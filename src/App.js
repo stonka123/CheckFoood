@@ -28,6 +28,8 @@ function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [isDarkMode, setIsDarkMode] = useState(false)
 
+	const generateMealsState = [...dataMeals]
+
 	const setTitle = useWebsiteTitle()
 	setTitle('Strona głóna')
 
@@ -48,7 +50,7 @@ function App() {
 		body[0].classList.toggle('body-dark')
 		setIsDarkMode(!isDarkMode)
 	}
-	const title = useContext(addRecipeContext)
+
 	const content = (
 		<>
 			<Routes>

@@ -1,11 +1,11 @@
+import ClipLoader from 'react-spinners/ClipLoader'
+
+const override = {
+	display: 'block',
+	margin: '1em auto',
+}
 function LoadingBar() {
-	return (
-		<div className='d-flex justify-content-center mt-5'>
-			<div className='spinner-border' role='status' style={{ color: 'var(--mainColor)' }}>
-				<span className='sr-only'></span>
-			</div>
-		</div>
-	)
+	return <ClipLoader cssOverride={override} color='#85bd3a' size={35} speedMultiplier={0.5} />
 }
 
 export default LoadingBar

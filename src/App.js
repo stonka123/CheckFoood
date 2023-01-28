@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useReducer, useState } from 'react'
 import { BrowserRouter as Router, Route, Routes, Outlet, Navigate } from 'react-router-dom'
 import './App.css'
 import Footer from './components/Footer/Footer'
@@ -28,37 +28,52 @@ function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [isDarkMode, setIsDarkMode] = useState(false)
 
-	const generateMealsState = [...dataMeals]
-
 	const setTitle = useWebsiteTitle()
 	setTitle('Strona głóna')
 
 	useEffect(() => {
 		setTimeout(() => {
-			setMeals(dataMeals)
 			setLoading(false)
+			dispatch({ type: 'set-meals', meals: dataMeals })
 		}, 1000)
 	}, [])
 
 	const searchHandler = term => {
 		const newMeals = [...dataMeals].filter(x => x.title.toLowerCase().includes(term.toLowerCase()))
-		setMeals(newMeals)
+		dispatch({ type: 'set-meals', meals: newMeals })
 	}
 
 	const changeTheme = () => {
 		const body = document.getElementsByTagName('body')
 		body[0].classList.toggle('body-dark')
 		setIsDarkMode(!isDarkMode)
+		dispatch({ type: 'change-name' })
 	}
+	// reducer
+	const reducer = (state, action) => {
+		switch (action.type) {
+			case 'change-name':
+				return { ...state, namek: state.namek === 'jasny' ? 'ciemny' : 'jasny' }
+			case 'set-meals':
+				return { ...state, meals: action.meals }
+		}
+
+		return state
+	}
+
+	const initialState = { namek: 'jasny', meals: { ...dataMeals } }
+
+	const [state, dispatch] = useReducer(reducer, initialState)
 
 	const content = (
 		<>
 			<Routes>
-				<Route path='/przepisy/:id' element={<ShowMeal meals={meals} />} />
+				<Route path='/przepisy/:id' element={<ShowMeal state={state} />} />
 				<Route path='profil/ulubione/dodaj' element={isAuthenticated ? <AddRecipe /> : <p>zaloguj sie!</p>} />
 				<Route path='/profil/*' element={isAuthenticated ? <Profile /> : <Navigate to='/zaloguj' />} />
 				<Route path='/rejestracja/*' element={<Register />} />
-				<Route path='/' element={loading ? <LoadingBar /> : <Meals meals={meals} />} end />
+				<Route path='/' element={loading ? <LoadingBar /> : <Meals meals={meals} state={state} />} end />
+
 				<Route path='*' element={<NotFound />} />
 			</Routes>
 		</>

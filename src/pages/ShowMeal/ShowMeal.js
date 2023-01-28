@@ -6,7 +6,6 @@ import { addRecipeContext } from '../../context/addRecipeContext'
 import styles from './ShowMeal.module.css'
 
 export default function ShowMeal(props) {
-	const data = useContext(addRecipeContext)
 	const { id } = useParams()
 	const setTitle = useWebsiteTitle()
 	const [loading, setLoading] = useState(true)
@@ -14,11 +13,12 @@ export default function ShowMeal(props) {
 	const [meal, setMeal] = useState({})
 
 	const findRecipe = () => {
-		setMeal(data.find(product => String(product.id) === id))
-		setLoading(false)
-		setTitle('test')
+		setTimeout(() => {
+			setMeal(props.state.meals.find(product => String(product.id) === id))
+			setLoading(false)
+			setTitle('test')
+		}, 2000)
 	}
-	console.log(meal)
 
 	useEffect(() => {
 		findRecipe()

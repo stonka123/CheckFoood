@@ -8,11 +8,7 @@ import { addRecipeContext } from '../../context/addRecipeContext'
 
 function Meals(props) {
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
-
-
-
-
-	
+	console.log(props.state.meals)
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.containerMeals}>
@@ -21,9 +17,10 @@ function Meals(props) {
 					style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
 					Przepisy:
 				</p>
-				{props.meals.map(meal => (
+				{props.state.meals.map(meal => (
 					<Meal key={meal.id} {...meal} theme={props.theme} />
 				))}
+				<p>{props.state.namek}</p>
 			</div>
 		</div>
 	)

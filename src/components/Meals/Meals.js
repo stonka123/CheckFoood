@@ -8,7 +8,7 @@ import { addRecipeContext } from '../../context/addRecipeContext'
 
 function Meals(props) {
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
-	console.log(props.state.meals)
+
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.containerMeals}>
@@ -25,8 +25,6 @@ function Meals(props) {
 		</div>
 	)
 }
-Meals.propTypes = {
-	meals: PropTypes.array.isRequired,
-}
+
 
 export default Meals

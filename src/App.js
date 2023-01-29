@@ -10,7 +10,6 @@ import ThemeContext from './context/ThemeContext'
 import { dataMeals } from './data/dataMeals'
 import { themeLight, themeDark } from './context/Theme'
 import AuthContext from './context/authContext'
-import { addRecipeContext } from './context/addRecipeContext'
 
 // PAGES
 import ShowMeal from './pages/ShowMeal/ShowMeal'
@@ -23,17 +22,14 @@ import AddRecipe from './pages/Profile/Recipes/MyRecipes/AddRecipe/AddRecipe'
 import Register from './pages/Auth/Login/Register/Register'
 
 function App() {
-	const [meals, setMeals] = useState([])
-	const [loading, setLoading] = useState(true)
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [isDarkMode, setIsDarkMode] = useState(false)
 
 	const setTitle = useWebsiteTitle()
-	setTitle('Strona głóna')
 
 	useEffect(() => {
 		setTimeout(() => {
-			setLoading(false)
+			dispatch({ type: 'set-loading', loading: false })
 			dispatch({ type: 'set-meals', meals: dataMeals })
 		}, 1000)
 	}, [])
@@ -50,20 +46,23 @@ function App() {
 		dispatch({ type: 'change-name' })
 	}
 	// reducer
+
 	const reducer = (state, action) => {
 		switch (action.type) {
 			case 'change-name':
 				return { ...state, namek: state.namek === 'jasny' ? 'ciemny' : 'jasny' }
 			case 'set-meals':
 				return { ...state, meals: action.meals }
+			case 'set-loading':
+				return { ...state, loading: action.loading }
 		}
 
 		return state
 	}
 
-	const initialState = { namek: 'jasny', meals: { ...dataMeals } }
-
+	const initialState = { namek: 'jasny', meals: { ...dataMeals }, loading: true }
 	const [state, dispatch] = useReducer(reducer, initialState)
+	setTitle('Strona główna')
 
 	const content = (
 		<>
@@ -72,8 +71,7 @@ function App() {
 				<Route path='profil/ulubione/dodaj' element={isAuthenticated ? <AddRecipe /> : <p>zaloguj sie!</p>} />
 				<Route path='/profil/*' element={isAuthenticated ? <Profile /> : <Navigate to='/zaloguj' />} />
 				<Route path='/rejestracja/*' element={<Register />} />
-				<Route path='/' element={loading ? <LoadingBar /> : <Meals meals={meals} state={state} />} end />
-
+				<Route path='/' element={state.loading ? <LoadingBar /> : <Meals state={state} />} end />
 				<Route path='*' element={<NotFound />} />
 			</Routes>
 		</>
@@ -81,23 +79,21 @@ function App() {
 
 	return (
 		<Router>
-			<addRecipeContext.Provider value={meals}>
-				<AuthContext.Provider
-					value={{
-						isAuthenticated: isAuthenticated,
-						login: () => setIsAuthenticated(true),
-						logout: () => setIsAuthenticated(false),
-					}}>
-					<ThemeContext.Provider value={{ themeLight, themeDark, isDarkMode }}>
-						<div className='App'>
-							<Header changeTheme={changeTheme} onSearch={term => searchHandler(term)} />
-							<Menu />
-							{content}
-							<Footer />
-						</div>
-					</ThemeContext.Provider>
-				</AuthContext.Provider>
-			</addRecipeContext.Provider>
+			<AuthContext.Provider
+				value={{
+					isAuthenticated: isAuthenticated,
+					login: () => setIsAuthenticated(true),
+					logout: () => setIsAuthenticated(false),
+				}}>
+				<ThemeContext.Provider value={{ themeLight, themeDark, isDarkMode }}>
+					<div className='App'>
+						<Header changeTheme={changeTheme} onSearch={term => searchHandler(term)} />
+						<Menu />
+						{content}
+						<Footer />
+					</div>
+				</ThemeContext.Provider>
+			</AuthContext.Provider>
 		</Router>
 	)
 }

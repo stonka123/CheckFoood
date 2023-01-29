@@ -27,6 +27,7 @@ function App() {
 	const [isDarkMode, setIsDarkMode] = useState(false)
 
 	const setTitle = useWebsiteTitle()
+	setTitle('Strona główna')
 
 	useEffect(() => {
 		setTimeout(() => {
@@ -63,7 +64,7 @@ function App() {
 
 	const initialState = { namek: 'jasny', meals: { ...dataMeals }, loading: true }
 	const [state, dispatch] = useReducer(reducer, initialState)
-	setTitle('Strona główna')
+
 	let nextId = 3
 	const initialRecipes = [...dataMeals]
 
@@ -75,6 +76,7 @@ function App() {
 				<Route path='profil/ulubione/dodaj' element={isAuthenticated ? <AddRecipe /> : <p>zaloguj sie!</p>} />
 				<Route path='/profil/*' element={isAuthenticated ? <Profile /> : <Navigate to='/zaloguj' />} />
 				<Route path='/rejestracja/*' element={<Register />} />
+				<Route path='/zaloguj/*' element={<Login />} />
 				<Route path='/' element={state.loading ? <LoadingBar /> : <Meals state={state} />} end />
 				<Route path='*' element={<NotFound />} />
 			</Routes>

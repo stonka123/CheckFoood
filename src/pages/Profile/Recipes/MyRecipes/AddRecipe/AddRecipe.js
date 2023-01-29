@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import styles from './AddRecipe.module.css'
 import RecipeContext, { RecipeDispatchContext } from '../../../../../context/RecipeContext'
 function AddRecipe(props) {
-	const history = useNavigate()
+	const navigate = useNavigate()
 	const imageRef = useRef()
 	const [loading, setLoading] = useState(false)
 	const dispatche = useContext(RecipeDispatchContext)
@@ -19,7 +19,8 @@ function AddRecipe(props) {
 		img: null,
 	})
 
-	const submit = e => {
+	const submit = async e => {
+		e.preventDefault()
 		dispatche({
 			type: 'added-recipe',
 			title: form.title,
@@ -30,7 +31,7 @@ function AddRecipe(props) {
 			difficulty: form.difficulty,
 			img: form.img,
 		})
-		console.log(form)
+		navigate('/')
 	}
 
 	return (

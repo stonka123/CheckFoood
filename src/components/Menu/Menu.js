@@ -1,9 +1,11 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styles from './Menu.module.css'
 import AuthContext from '../../context/authContext'
 import { Link, NavLink, Outlet } from 'react-router-dom'
 
 function Menu() {
+	const [loading, setLoading] = useState(false)
+
 	const auth = useContext(AuthContext)
 
 	const login = e => {
@@ -19,7 +21,7 @@ function Menu() {
 		color: 'var(--mainColor)',
 		borderRadius: '10px',
 	}
-	let activeClassName = 'underline'
+
 	return (
 		<div className={styles.container}>
 			<ul>
@@ -39,9 +41,9 @@ function Menu() {
 						</>
 					) : (
 						<>
-							<a onClick={login} href='#'>
-								Zaloguj
-							</a>
+							{/* <Link onClick={login}>Zaloguj</Link> */}
+							<Link to='/zaloguj'>Zaloguj</Link>
+							<Link to='/rejestracja'>Zarejestruj</Link>
 						</>
 					)}
 				</li>

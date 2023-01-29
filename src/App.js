@@ -19,6 +19,7 @@ import Login from './pages/Auth/Login/Login'
 import Profile from '../src/pages/Profile/Profile'
 import useWebsiteTitle from './context/useWebsiteTitle'
 import AddRecipe from './pages/Profile/Recipes/MyRecipes/AddRecipe/AddRecipe'
+import { RecipeContext, RecipeDispatchContext } from './context/RecipeContext'
 import Register from './pages/Auth/Login/Register/Register'
 
 function App() {
@@ -63,7 +64,10 @@ function App() {
 	const initialState = { namek: 'jasny', meals: { ...dataMeals }, loading: true }
 	const [state, dispatch] = useReducer(reducer, initialState)
 	setTitle('Strona główna')
+	let nextId = 3
+	const initialRecipes = [...dataMeals]
 
+	const [recipes, dispatche] = useReducer(recipesReducer, initialRecipes)
 	const content = (
 		<>
 			<Routes>
@@ -79,23 +83,47 @@ function App() {
 
 	return (
 		<Router>
-			<AuthContext.Provider
-				value={{
-					isAuthenticated: isAuthenticated,
-					login: () => setIsAuthenticated(true),
-					logout: () => setIsAuthenticated(false),
-				}}>
-				<ThemeContext.Provider value={{ themeLight, themeDark, isDarkMode }}>
-					<div className='App'>
-						<Header changeTheme={changeTheme} onSearch={term => searchHandler(term)} />
-						<Menu />
-						{content}
-						<Footer />
-					</div>
-				</ThemeContext.Provider>
-			</AuthContext.Provider>
+			<RecipeContext.Provider value={recipes}>
+				<RecipeDispatchContext.Provider value={dispatche}>
+					<AuthContext.Provider
+						value={{
+							isAuthenticated: isAuthenticated,
+							login: () => setIsAuthenticated(true),
+							logout: () => setIsAuthenticated(false),
+						}}>
+						<ThemeContext.Provider value={{ themeLight, themeDark, isDarkMode }}>
+							<div className='App'>
+								<Header changeTheme={changeTheme} onSearch={term => searchHandler(term)} />
+								<Menu />
+								{content}
+								<Footer />
+							</div>
+						</ThemeContext.Provider>
+					</AuthContext.Provider>
+				</RecipeDispatchContext.Provider>
+			</RecipeContext.Provider>
 		</Router>
 	)
+	function recipesReducer(recipes, action) {
+		switch (action.type) {
+			case 'added-recipe': {
+				return [
+					...recipes,
+					{
+						id: action.id,
+						title: action.title,
+						time: action.time,
+						calories: action.calories,
+						img: action.img,
+						difficulty: action.difficulty,
+					},
+				]
+			}
+			default: {
+				throw Error('Unknown action: ' + action.type)
+			}
+		}
+	}
 }
 
 export default App

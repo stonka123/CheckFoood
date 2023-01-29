@@ -2,22 +2,34 @@ import LoadingBar from '../../../../../components/UI/LoadingBar/LoadingBar'
 import { useState, useRef, createElement, createContext, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './AddRecipe.module.css'
-import { addRecipeContext } from '../../../../../context/addRecipeContext'
+import RecipeContext, { RecipeDispatchContext } from '../../../../../context/RecipeContext'
 function AddRecipe(props) {
 	const history = useNavigate()
 	const imageRef = useRef()
 	const [loading, setLoading] = useState(false)
-
-	const data = useContext(addRecipeContext)
-
-	const [form, setForm] = useState([
-		...data,
-		[{ id: 5, title: '', rating: '', calories: '', time: '', difficulty: '', img: null }],
-	])
+	const dispatche = useContext(RecipeDispatchContext)
+	let nextId = 4
+	const [form, setForm] = useState({
+		id: nextId++,
+		title: '',
+		rating: '',
+		calories: '',
+		time: '',
+		difficulty: 'Easy',
+		img: null,
+	})
 
 	const submit = e => {
-		e.preventDefault()
-
+		dispatche({
+			type: 'added-recipe',
+			title: form.title,
+			id: form.id++,
+			title: form.title,
+			time: form.time,
+			calories: form.calories,
+			difficulty: form.difficulty,
+			img: form.img,
+		})
 		console.log(form)
 	}
 
@@ -39,22 +51,25 @@ function AddRecipe(props) {
 						</div>
 						<div className='form-group'>
 							<label>Kalorie</label>
-							<textarea
+							<input
 								required
-								onChange={e => setForm({ ...form, calories: e.target.value })}
 								value={form.calories}
+								onChange={e => setForm({ ...form, calories: e.target.value })}
+								type='text'
 								className='form-control'
-								rows='3'></textarea>
+							/>
 						</div>
 						<div className='form-group'>
 							<label>Czas</label>
-							<textarea
+							<input
 								required
-								onChange={e => setForm({ ...form, time: e.target.value })}
 								value={form.time}
+								onChange={e => setForm({ ...form, time: e.target.value })}
+								type='text'
 								className='form-control'
-								rows='3'></textarea>
+							/>
 						</div>
+
 						<div className='form-group'>
 							<label>Skład</label>
 							<textarea
@@ -80,8 +95,9 @@ function AddRecipe(props) {
 						<div className='form-group'>
 							<label>Zdjęcie</label>
 							<input
-								type='file'
-								onChange={e => setForm({ ...form, image: e.target.files })}
+								src={e => setForm({ ...form, img: e.target.value })}
+								type='text'
+								onChange={e => setForm({ ...form, img: e.target.value })}
 								ref={imageRef}
 								className='form-control'
 							/>

@@ -20,7 +20,10 @@ function Meal(props) {
 			<div className={styles.bgc} style={{ backgroundImage: `url(${props.img})` }}></div>
 
 			<div className={styles.content}>
-				<p className={styles.title}>{props.title}</p>
+				<p className={styles.title}>
+					{props.title} {props.id}
+				</p>
+
 				<div className={styles.options}>
 					<div className={styles.ratings}>
 						<svg
@@ -62,10 +65,7 @@ function Meal(props) {
 				<ThemeContext.Consumer>
 					{value => (
 						<div className={styles.bottom}>
-							<Link
-								
-								to={`/przepisy/${props.id}`}
-								className={`btn btn-secondary m-1 ${styles.btnShow} text-${value}`}>
+							<Link to={`/przepisy/${props.id}`} className={`btn btn-secondary m-1 ${styles.btnShow} text-${value}`}>
 								Pokaż
 							</Link>
 							{/* <a href='/meals/id' className={`btn btn-secondary m-1 ${styles.btnShow} text-${value}`}>

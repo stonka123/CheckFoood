@@ -2,26 +2,28 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import LoadingBar from '../../components/UI/LoadingBar/LoadingBar'
 import useWebsiteTitle from '../../context/useWebsiteTitle'
-import { addRecipeContext } from '../../context/addRecipeContext'
+import { addRecipeContext, RecipeContext } from '../../context/RecipeContext'
 import styles from './ShowMeal.module.css'
 import { dataMeals } from '../../data/dataMeals'
 
 export default function ShowMeal(props) {
 	const { id } = useParams()
 	const setTitle = useWebsiteTitle()
+	const recipes = useContext(RecipeContext)
 
 	const [loading, setLoading] = useState(true)
 
-	const [meal, setMeal] = useState(props.state.meals)
+	const [meal, setMeal] = useState({})
 
 	const findRecipe = () => {
-		setMeal(props.state.meals.find(product => String(product.id) === id))
+		setMeal(recipes.find(product => String(product.id) === id))
 		setTitle(`Przepis -- ${meal.title} --`)
 		setLoading(false)
 	}
 	useEffect(() => {
 		findRecipe()
 	}, [meal.title])
+
 	if (loading) return <LoadingBar />
 	return (
 		<div className={styles.wrapper}>

@@ -2,15 +2,16 @@ import LoadingBar from '../../../../../components/UI/LoadingBar/LoadingBar'
 import { useState, useRef, createElement, createContext, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './AddRecipe.module.css'
-import RecipeContext, { RecipeDispatchContext } from '../../../../../context/RecipeContext'
+import { RecipeContext, RecipeDispatchContext } from '../../../../../context/RecipeContext'
+
 function AddRecipe(props) {
 	const navigate = useNavigate()
 	const imageRef = useRef()
 	const [loading, setLoading] = useState(false)
 	const dispatche = useContext(RecipeDispatchContext)
-	let nextId = 4
+
 	const [form, setForm] = useState({
-		id: nextId++,
+		id: 4,
 		title: '',
 		rating: '',
 		calories: '',
@@ -21,10 +22,11 @@ function AddRecipe(props) {
 
 	const submit = async e => {
 		e.preventDefault()
+
 		dispatche({
 			type: 'added-recipe',
 			title: form.title,
-			id: form.id++,
+			id: nextId++,
 			title: form.title,
 			time: form.time,
 			calories: form.calories,
@@ -34,6 +36,7 @@ function AddRecipe(props) {
 		navigate('/')
 	}
 
+	console.log(props.state.meals.id)
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.containerTitle}>
@@ -115,5 +118,5 @@ function AddRecipe(props) {
 		</div>
 	)
 }
-
+let nextId = 4
 export default AddRecipe

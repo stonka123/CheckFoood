@@ -23,6 +23,45 @@ import { RecipeContext, RecipeDispatchContext } from './context/RecipeContext'
 import Register from './pages/Auth/Login/Register/Register'
 
 function App() {
+	const backednmeals = [
+		{
+			id: 0,
+			title: 'Łosoś po norwesku',
+			rating: 4.2,
+			calories: 150,
+			time: '5:30',
+			difficulty: 'Hard',
+			img: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg',
+		},
+		{
+			id: 1,
+			title: 'Polędwica w szparagach',
+			rating: 4.7,
+			calories: 430,
+			time: '3:30',
+			difficulty: 'Medium',
+			img: 'https://cdn.pixabay.com/photo/2017/03/23/19/57/asparagus-2169305_960_720.jpg',
+		},
+		{
+			id: 2,
+			title: 'Omlet z bananem',
+			rating: 4.1,
+			calories: 280,
+			time: '1:15',
+			difficulty: 'Easy',
+			img: 'https://cdn.pixabay.com/photo/2017/06/16/18/35/tarte-2409958_960_720.jpg',
+		},
+		{
+			id: 3,
+			title: 'Chleb po swojsku test skonczony',
+			rating: 3.4,
+			calories: 420,
+			time: '2:25',
+			difficulty: 'Medium',
+			img: 'https://cdn.pixabay.com/photo/2018/10/14/18/29/meatloaf-3747129_960_720.jpg',
+		},
+	]
+
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [isDarkMode, setIsDarkMode] = useState(false)
 
@@ -32,13 +71,15 @@ function App() {
 	useEffect(() => {
 		setTimeout(() => {
 			dispatch({ type: 'set-loading', loading: false })
-			dispatch({ type: 'set-meals', meals: dataMeals })
+			dispatch({ type: 'set-meals', meals: backednmeals })
 		}, 1000)
 	}, [])
 
 	const searchHandler = term => {
-		const newMeals = [...dataMeals].filter(x => x.title.toLowerCase().includes(term.toLowerCase()))
+		const newMeals = [...backednmeals].filter(x => x.title.toLowerCase().includes(term.toLowerCase()))
+		console.log(recipes)
 		dispatch({ type: 'set-meals', meals: newMeals })
+		console.log(newMeals)
 	}
 
 	const changeTheme = () => {
@@ -61,19 +102,42 @@ function App() {
 
 		return state
 	}
+	const recipesReducer = (recipes, action) => {
+		switch (action.type) {
+			case 'added-recipe': {
+				return [
+					...recipes,
+					{
+						id: action.id,
+						title: action.title,
+						time: action.time,
+						calories: action.calories,
+						img: action.img,
+						difficulty: action.difficulty,
+					},
+				]
+			}
 
-	const initialState = { namek: 'jasny', meals: { ...dataMeals }, loading: true }
-	const [state, dispatch] = useReducer(reducer, initialState)
+			default: {
+				throw Error('Unknown action: ' + action.type)
+			}
+		}
+	}
 
-	let nextId = 3
 	const initialRecipes = [...dataMeals]
+	const initialState = { namek: 'jasny', meals: [], loading: true }
 
+	const [state, dispatch] = useReducer(reducer, initialState)
 	const [recipes, dispatche] = useReducer(recipesReducer, initialRecipes)
+
 	const content = (
 		<>
 			<Routes>
 				<Route path='/przepisy/:id' element={<ShowMeal state={state} />} />
-				<Route path='profil/ulubione/dodaj' element={isAuthenticated ? <AddRecipe /> : <p>zaloguj sie!</p>} />
+				<Route
+					path='profil/ulubione/dodaj'
+					element={isAuthenticated ? <AddRecipe state={state} /> : <p>zaloguj sie!</p>}
+				/>
 				<Route path='/profil/*' element={isAuthenticated ? <Profile /> : <Navigate to='/zaloguj' />} />
 				<Route path='/rejestracja/*' element={<Register />} />
 				<Route path='/zaloguj/*' element={<Login />} />
@@ -106,26 +170,6 @@ function App() {
 			</RecipeContext.Provider>
 		</Router>
 	)
-	function recipesReducer(recipes, action) {
-		switch (action.type) {
-			case 'added-recipe': {
-				return [
-					...recipes,
-					{
-						id: action.id,
-						title: action.title,
-						time: action.time,
-						calories: action.calories,
-						img: action.img,
-						difficulty: action.difficulty,
-					},
-				]
-			}
-			default: {
-				throw Error('Unknown action: ' + action.type)
-			}
-		}
-	}
 }
 
 export default App

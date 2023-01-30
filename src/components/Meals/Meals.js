@@ -20,9 +20,10 @@ function Meals(props) {
 				</p>
 				{meals.map(meal => (
 					<li key={meal.id}>
-						<Meal {...meal} theme={props.theme} />
+						<Meal {...meal} state={props.state} theme={props.theme} />
 					</li>
 				))}
+
 				<p>{props.state.namek}</p>
 			</div>
 		</div>

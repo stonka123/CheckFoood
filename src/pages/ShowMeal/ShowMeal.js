@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import LoadingBar from '../../components/UI/LoadingBar/LoadingBar'
 import useWebsiteTitle from '../../context/useWebsiteTitle'
 import { addRecipeContext, RecipeContext } from '../../context/RecipeContext'
+import ThemeContext from '../../context/ThemeContext'
 import styles from './ShowMeal.module.css'
 import { dataMeals } from '../../data/dataMeals'
-
+import { themeDark, themeLight, isDarkMode } from '../../context/Theme'
 export default function ShowMeal(props) {
+	const navigate = useNavigate()
+	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
 	const { id } = useParams()
 	const setTitle = useWebsiteTitle()
 	const recipes = useContext(RecipeContext)
@@ -27,10 +30,15 @@ export default function ShowMeal(props) {
 	if (loading) return <LoadingBar />
 	return (
 		<div className={styles.wrapper}>
-			<div className={styles.containerTitle}>
-				<Link className={styles.buttonBack} to='/'>
-					Wróć
-				</Link>
+			<div
+				className={styles.containerTitle}
+				style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
+				<button
+					onClick={() => {
+						navigate('/')
+					}}>
+					Wróc
+				</button>
 				<h3 className={styles.titleMeal}>{meal.title}</h3>
 				<img src={meal.img} />
 				<div className={styles.infoBox}>

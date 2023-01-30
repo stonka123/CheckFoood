@@ -41,8 +41,8 @@ function Menu() {
 						</>
 					) : (
 						<>
-							{/* <Link onClick={login}>Zaloguj</Link> */}
-							<Link to='/zaloguj'>Zaloguj</Link>
+							<Link onClick={login}>Zaloguj</Link>
+							{/* <Link to='/zaloguj'>Zaloguj</Link> */}
 							<Link to='/rejestracja'>Zarejestruj</Link>
 						</>
 					)}

@@ -8,7 +8,7 @@ import { addRecipeContext, RecipeContext } from "../../context/RecipeContext";
 
 function Meals(props) {
   const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext);
-  const meals = useContext(RecipeContext);
+  const { meals } = useContext(RecipeContext);
 
   return (
     <div className={styles.wrapper}>
@@ -23,7 +23,7 @@ function Meals(props) {
         >
           Przepisy:
         </p>
-        {props.state.meals.map((meal) => (
+        {meals.map((meal) => (
           <li key={meal.id}>
             <Meal {...meal} state={props.state} theme={props.theme} />
           </li>

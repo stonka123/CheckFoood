@@ -13,8 +13,12 @@
 	text-align: left;
 	align-self: flex-start;
 	margin-left: 1em;
+	padding: 0.5em;
 }
 .wrapper {
 	padding: 1em;
 	height: 100%;
+}
+li {
+	padding: 0;
 }

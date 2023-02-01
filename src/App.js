@@ -23,6 +23,7 @@ import { RecipeContext, RecipeDispatchContext } from './context/RecipeContext'
 import Register from './pages/Auth/Login/Register/Register'
 
 function App() {
+	// zmienic na false \/
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [isDarkMode, setIsDarkMode] = useState(false)
 	const [searchTerm, setSearchTerm] = useState('')
@@ -112,5 +113,3 @@ function App() {
 }
 
 export default App
-
-// 9.13 poprawic useWebsite title

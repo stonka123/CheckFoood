@@ -17,9 +17,10 @@ function Menu() {
 		auth.logout()
 	}
 	let activeStyle = {
-		backgroundColor: 'white',
-		color: 'var(--mainColor)',
+		backgroundColor: '#fff',
+		color: '#2b2b2b',
 		borderRadius: '10px',
+		fontWeight: 'bold',
 	}
 
 	return (
@@ -29,23 +30,28 @@ function Menu() {
 					<NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} to='/' end>
 						Strona główna
 					</NavLink>
-
-					{auth.isAuthenticated ? (
-						<>
-							<NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} to='/profil'>
-								Profil
-							</NavLink>
-							<NavLink onClick={logout} to='/wylogowano'>
-								Wyloguj
-							</NavLink>
-						</>
-					) : (
-						<>
-							<Link onClick={login}>Zaloguj</Link>
-							{/* <Link to='/zaloguj'>Zaloguj</Link> */}
-							<Link to='/rejestracja'>Zarejestruj</Link>
-						</>
-					)}
+					<div className={styles['profile-box']}>
+						{auth.isAuthenticated ? (
+							<>
+								<NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} to='/profil'>
+									Profil
+								</NavLink>
+								<NavLink onClick={logout} to='/wylogowano'>
+									Wyloguj
+								</NavLink>
+							</>
+						) : (
+							<>
+								{/* <Link onClick={login}>Zaloguj</Link> */}
+								<NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} to='/zaloguj'>
+									Zaloguj
+								</NavLink>
+								<NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} to='/rejestracja'>
+									Zarejestruj
+								</NavLink>
+							</>
+						)}
+					</div>
 				</li>
 			</ul>
 		</div>

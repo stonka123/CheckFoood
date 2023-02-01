@@ -29,9 +29,9 @@ export default function ShowMeal(props) {
 
 	if (loading) return <LoadingBar />
 	return (
-		<div className={styles.wrapper}>
+		<div className='wrapper'>
 			<div
-				className={styles.containerTitle}
+				className='container'
 				style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
 				<button
 					onClick={() => {
@@ -76,12 +76,7 @@ export default function ShowMeal(props) {
 				</div>
 				<div className={styles.containerPrepatation}>
 					<h5> Przygotowanie : </h5>
-					<p>
-						Wszystkie składniki na sos dokładnie mieszamy ze sobą. Kaszę gotujemy zgodnie z zaleceniami producenta na
-						opakowaniu. Paprykę, kapary i suszone pomidory kroimy w drobną kostkę. Kukurydzę odsączamy z zalewy za
-						pomocą sitka. Kolendrę siekamy. Wszystkie składniki mieszamy ze sobą, dodajemy nasz sos. Sałatkę układamy za
-						pomocą kuchennego ringa.
-					</p>
+					<p>{meal.recipe}</p>
 				</div>
 			</div>
 		</div>

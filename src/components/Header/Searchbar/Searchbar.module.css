@@ -3,20 +3,21 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
-	margin: 1em;
 }
 
 .input {
-	width: 50%;
+	width: 60%;
 	max-width: 400px;
 	padding: 0.5em 0.7em;
 	border-radius: 15px;
 	font-size: 1rem;
-	border: 2px solid var(--mainColor);
+	background-color: #edeff1;
+	border: 2px solid rgb(196, 195, 195);
 }
 .input:focus {
-	border: 2px solid var(--mainColor);
+	border: 2px solid rgb(226, 226, 226);
 	outline: none;
+	background-color: #f8f8f8;
 }
 
 .button {

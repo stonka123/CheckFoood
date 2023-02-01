@@ -17,7 +17,7 @@ function AddRecipe(props) {
 		calories: '',
 		time: '',
 		difficulty: 'Easy',
-		img: null,
+		img: 'https://cdn.pixabay.com/photo/2016/08/07/15/34/do-not-take-photos-1576438_960_720.png',
 	})
 
 	const submit = async e => {
@@ -31,9 +31,6 @@ function AddRecipe(props) {
 			difficulty: form.difficulty,
 			img: form.img,
 		}
-
-		console.log(obj)
-
 		handleAddRecipe(obj)
 		navigate('/')
 	}
@@ -41,80 +38,77 @@ function AddRecipe(props) {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.containerTitle}>
-				<h4 className='card-header'>Nowy Przepis</h4>
-				<div className='card-body'>
-					<form>
-						<div className='form-group'>
-							<label>Nazwa</label>
-							<input
-								required
-								value={form.title}
-								onChange={e => setForm({ ...form, title: e.target.value })}
-								type='text'
-								className='form-control'
-							/>
-						</div>
-						<div className='form-group'>
-							<label>Kalorie</label>
+				<h3>Nowy Przepis</h3>
+				<form onSubmit={submit}>
+					<div className={styles.box}>
+						<label className={styles.label}>Nazwa potrawy</label>
+						<input
+							className={styles.input}
+							required
+							value={form.title}
+							onChange={e => setForm({ ...form, title: e.target.value })}
+							type='text'
+						/>
+					</div>
+					<div className={styles.boxSmall}>
+						<div className={styles['box-kcal']}>
+							<label className={styles['label-kcal']}>Kalorie</label>
 							<input
 								required
 								value={form.calories}
 								onChange={e => setForm({ ...form, calories: e.target.value })}
-								type='text'
-								className='form-control'
+								type='number'
+								min='0'
+								max='10000'
+								className={styles.kcal}
 							/>
 						</div>
-						<div className='form-group'>
-							<label>Czas</label>
+						<div className={styles['box-time']}>
+							<label className={styles['label-time']}>Czas</label>
 							<input
 								required
 								value={form.time}
 								onChange={e => setForm({ ...form, time: e.target.value })}
-								type='text'
-								className='form-control'
+								type='time'
+								className={styles.time}
 							/>
 						</div>
+					</div>
+					<div className={styles.box}>
+						<label className={styles.label}>Skład</label>
+						<textarea
+							required
+							onChange={e => setForm({ ...form, composition: e.target.value })}
+							value={form.composition}
+							rows='5'></textarea>
+					</div>
+					<div className={styles.box}>
+						<label className={styles.label}>Poziom trudności</label>
+						<select
+							onChange={e => setForm({ ...form, difficulty: e.target.value })}
+							value={form.difficulty}
+							name=''
+							id=''>
+							<option value='Easy'>Easy</option>
+							<option value='Medium'>Medium</option>
+							<option value='Hard'>Hard</option>
+						</select>
+					</div>
+					<div className={styles.box}>
+						<label className={styles.label}>Zdjęcie</label>
+						<input
+							src={e => setForm({ ...form, img: e.target.value })}
+							type='text'
+							onChange={e => setForm({ ...form, img: e.target.value })}
+							ref={imageRef}
+							placeholder='Link do zdjęcia...'
+						/>
+					</div>
 
-						<div className='form-group'>
-							<label>Skład</label>
-							<textarea
-								required
-								onChange={e => setForm({ ...form, composition: e.target.value })}
-								value={form.composition}
-								className='form-control'
-								rows='3'></textarea>
-						</div>
-						<div className='form-group'>
-							<label>Poziom trudności</label>
-							<select
-								onChange={e => setForm({ ...form, difficulty: e.target.value })}
-								value={form.difficulty}
-								className='form-control'
-								name=''
-								id=''>
-								<option value='Easy'>Easy</option>
-								<option value='Medium'>Medium</option>
-								<option value='Hard'>Hard</option>
-							</select>
-						</div>
-						<div className='form-group'>
-							<label>Zdjęcie</label>
-							<input
-								src={e => setForm({ ...form, img: e.target.value })}
-								type='text'
-								onChange={e => setForm({ ...form, img: e.target.value })}
-								ref={imageRef}
-								className='form-control'
-							/>
-						</div>
-
-						<div className='text-end mt-3'>
-							<button onClick={submit} className='btn btn-success'>
-								Dodaj przepis!
-							</button>
-						</div>
-					</form>
-				</div>
+					<div>
+						<button>Dodaj przepis!</button>
+					</div>
+				</form>
 			</div>
 		</div>
 	)

@@ -9,6 +9,7 @@
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
+	padding: 0.3em;
 }
 
 ul {
@@ -19,7 +20,7 @@ ul {
 	width: 100%;
 	padding: 0.1em;
 	margin: 0.5em;
-	background-color: var(--mainColor);
+	background-color: #edeff1;
 	border-radius: 10px;
 }
 li {
@@ -34,16 +35,17 @@ li {
 a {
 	border-radius: 10px;
 	font-size: 0.8rem;
-	background-color: var(--mainColor);
-	border: 2px solid var(--mainColor);
-	color: #fff;
+	background-color: #edeff1;
+	margin: 0.3em;
+	font-weight: bold;
+	color: #7e7c7c;
 	padding: 0.7em 0.7em;
 	text-decoration: none;
 	transition: background-color 0.35s, color 0.35s;
 }
 a:hover {
 	background-color: #fff;
-	color: var(--mainColor);
+	color: #1f1e1e;
 }
 .menuItemActive {
 	background-color: red;

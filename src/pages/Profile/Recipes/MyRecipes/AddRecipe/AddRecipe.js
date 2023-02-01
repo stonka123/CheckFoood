@@ -8,7 +8,7 @@ function AddRecipe(props) {
 	const navigate = useNavigate()
 	const imageRef = useRef()
 	const [loading, setLoading] = useState(false)
-	const dispatche = useContext(RecipeDispatchContext)
+	const { handleAddRecipe } = useContext(RecipeContext)
 
 	const [form, setForm] = useState({
 		id: 4,
@@ -23,20 +23,21 @@ function AddRecipe(props) {
 	const submit = async e => {
 		e.preventDefault()
 
-		dispatche({
-			type: 'added-recipe',
-			title: form.title,
+		const obj = {
 			id: nextId++,
 			title: form.title,
 			time: form.time,
 			calories: form.calories,
 			difficulty: form.difficulty,
 			img: form.img,
-		})
+		}
+
+		console.log(obj)
+
+		handleAddRecipe(obj)
 		navigate('/')
 	}
 
-	console.log(props.state.meals.id)
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.containerTitle}>

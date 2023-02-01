@@ -23,45 +23,6 @@ import { RecipeContext, RecipeDispatchContext } from './context/RecipeContext'
 import Register from './pages/Auth/Login/Register/Register'
 
 function App() {
-	const backednmeals = [
-		{
-			id: 0,
-			title: 'Łosoś po norwesku',
-			rating: 4.2,
-			calories: 150,
-			time: '5:30',
-			difficulty: 'Hard',
-			img: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg',
-		},
-		{
-			id: 1,
-			title: 'Polędwica w szparagach',
-			rating: 4.7,
-			calories: 430,
-			time: '3:30',
-			difficulty: 'Medium',
-			img: 'https://cdn.pixabay.com/photo/2017/03/23/19/57/asparagus-2169305_960_720.jpg',
-		},
-		{
-			id: 2,
-			title: 'Omlet z bananem',
-			rating: 4.1,
-			calories: 280,
-			time: '1:15',
-			difficulty: 'Easy',
-			img: 'https://cdn.pixabay.com/photo/2017/06/16/18/35/tarte-2409958_960_720.jpg',
-		},
-		{
-			id: 3,
-			title: 'Chleb po swojsku test skonczony',
-			rating: 3.4,
-			calories: 420,
-			time: '2:25',
-			difficulty: 'Medium',
-			img: 'https://cdn.pixabay.com/photo/2018/10/14/18/29/meatloaf-3747129_960_720.jpg',
-		},
-	]
-
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [isDarkMode, setIsDarkMode] = useState(false)
 
@@ -71,15 +32,14 @@ function App() {
 	useEffect(() => {
 		setTimeout(() => {
 			dispatch({ type: 'set-loading', loading: false })
-			dispatch({ type: 'set-meals', meals: backednmeals })
+			dispatch({ type: 'set-meals', meals: dataMeals })
 		}, 1000)
 	}, [])
 
 	const searchHandler = term => {
-		const newMeals = [...backednmeals].filter(x => x.title.toLowerCase().includes(term.toLowerCase()))
-		console.log(recipes)
+		const newMeals = state.meals.filter(x => x.title.toLowerCase().includes(term.toLowerCase()))
 		dispatch({ type: 'set-meals', meals: newMeals })
-		console.log(newMeals)
+		console.log(state.meals)
 	}
 
 	const changeTheme = () => {
@@ -88,6 +48,7 @@ function App() {
 		setIsDarkMode(!isDarkMode)
 		dispatch({ type: 'change-name' })
 	}
+
 	// reducer
 
 	const reducer = (state, action) => {
@@ -98,24 +59,8 @@ function App() {
 				return { ...state, meals: action.meals }
 			case 'set-loading':
 				return { ...state, loading: action.loading }
-		}
-
-		return state
-	}
-	const recipesReducer = (recipes, action) => {
-		switch (action.type) {
 			case 'added-recipe': {
-				return [
-					...recipes,
-					{
-						id: action.id,
-						title: action.title,
-						time: action.time,
-						calories: action.calories,
-						img: action.img,
-						difficulty: action.difficulty,
-					},
-				]
+				return { ...state, meals: [...state.meals, action.meals] }
 			}
 
 			default: {
@@ -123,12 +68,13 @@ function App() {
 			}
 		}
 	}
-
-	const initialRecipes = [...dataMeals]
-	const initialState = { namek: 'jasny', meals: [], loading: true }
+	const handleAddRecipe = meals => {
+		dispatch({ type: 'added-recipe', meals })
+	}
+	const initialState = { namek: 'jasny', meals: dataMeals, loading: true }
 
 	const [state, dispatch] = useReducer(reducer, initialState)
-	const [recipes, dispatche] = useReducer(recipesReducer, initialRecipes)
+	console.log(state.meals)
 
 	const content = (
 		<>
@@ -149,24 +95,22 @@ function App() {
 
 	return (
 		<Router>
-			<RecipeContext.Provider value={recipes}>
-				<RecipeDispatchContext.Provider value={dispatche}>
-					<AuthContext.Provider
-						value={{
-							isAuthenticated: isAuthenticated,
-							login: () => setIsAuthenticated(true),
-							logout: () => setIsAuthenticated(false),
-						}}>
-						<ThemeContext.Provider value={{ themeLight, themeDark, isDarkMode }}>
-							<div className='App'>
-								<Header changeTheme={changeTheme} onSearch={term => searchHandler(term)} />
-								<Menu />
-								{content}
-								<Footer />
-							</div>
-						</ThemeContext.Provider>
-					</AuthContext.Provider>
-				</RecipeDispatchContext.Provider>
+			<RecipeContext.Provider value={{ state, handleAddRecipe }}>
+				<AuthContext.Provider
+					value={{
+						isAuthenticated: isAuthenticated,
+						login: () => setIsAuthenticated(true),
+						logout: () => setIsAuthenticated(false),
+					}}>
+					<ThemeContext.Provider value={{ themeLight, themeDark, isDarkMode }}>
+						<div className='App'>
+							<Header changeTheme={changeTheme} onSearch={term => searchHandler(term)} />
+							<Menu />
+							{content}
+							<Footer />
+						</div>
+					</ThemeContext.Provider>
+				</AuthContext.Provider>
 			</RecipeContext.Provider>
 		</Router>
 	)

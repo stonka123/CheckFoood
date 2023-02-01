@@ -19,7 +19,7 @@ export default function ShowMeal(props) {
 	const [meal, setMeal] = useState({})
 
 	const findRecipe = () => {
-		setMeal(recipes.find(product => String(product.id) === id))
+		setMeal(props.state.meals.find(product => String(product.id) === id))
 		setTitle(`Przepis -- ${meal.title} --`)
 		setLoading(false)
 	}

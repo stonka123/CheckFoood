@@ -8,8 +8,19 @@ import { addRecipeContext, RecipeContext } from '../../context/RecipeContext'
 
 function Meals(props) {
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
-	const { state } = useContext(RecipeContext)
+	const { state, searchTerm } = useContext(RecipeContext)
 
+	const filteredData = state.meals.filter(el => {
+		if (searchTerm === '') {
+			return (
+				<li key={el.id}>
+					<Meal {...el} state={props.state} theme={props.theme} />
+				</li>
+			)
+		} else {
+			return el.title.toLowerCase().includes(searchTerm)
+		}
+	})
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.containerMeals}>
@@ -19,7 +30,7 @@ function Meals(props) {
 					Przepisy:
 				</p>
 
-				{state.meals.map(meal => (
+				{filteredData.map(meal => (
 					<li key={meal.id}>
 						<Meal {...meal} state={props.state} theme={props.theme} />
 					</li>

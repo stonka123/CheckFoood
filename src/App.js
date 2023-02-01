@@ -25,6 +25,7 @@ import Register from './pages/Auth/Login/Register/Register'
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [isDarkMode, setIsDarkMode] = useState(false)
+	const [searchTerm, setSearchTerm] = useState('')
 
 	const setTitle = useWebsiteTitle()
 	setTitle('Strona główna')
@@ -35,12 +36,6 @@ function App() {
 			dispatch({ type: 'set-meals', meals: dataMeals })
 		}, 1000)
 	}, [])
-
-	const searchHandler = term => {
-		const newMeals = state.meals.filter(x => x.title.toLowerCase().includes(term.toLowerCase()))
-		dispatch({ type: 'set-meals', meals: newMeals })
-		console.log(state.meals)
-	}
 
 	const changeTheme = () => {
 		const body = document.getElementsByTagName('body')
@@ -95,7 +90,7 @@ function App() {
 
 	return (
 		<Router>
-			<RecipeContext.Provider value={{ state, handleAddRecipe }}>
+			<RecipeContext.Provider value={{ state, handleAddRecipe, searchTerm }}>
 				<AuthContext.Provider
 					value={{
 						isAuthenticated: isAuthenticated,
@@ -104,7 +99,7 @@ function App() {
 					}}>
 					<ThemeContext.Provider value={{ themeLight, themeDark, isDarkMode }}>
 						<div className='App'>
-							<Header changeTheme={changeTheme} onSearch={term => searchHandler(term)} />
+							<Header changeTheme={changeTheme} onSearch={term => setSearchTerm(term)} />
 							<Menu />
 							{content}
 							<Footer />

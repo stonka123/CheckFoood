@@ -1,11 +1,35 @@
-
+.containerTitle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+	margin: 0 auto;
+}
+.wrapper {
+	padding: 1em;
+	height: 100%;
+}
 .containerTitle img {
 	width: 80%;
 }
-.buttonBack {
+.backBtn {
 	align-self: flex-start;
 	margin: 1em;
+	font-size: 0.6rem;
+	padding: 0.6em 1.2em;
+	color: rgb(32, 32, 32);
+	border: none;
+	border-radius: 10px;
+	transition: background-color 0.4s;
+	font-size: 0.7rem;
 }
+.backBtn:hover {
+	background-color: #cfcfcf;
+}
+
 .text {
 	font-weight: bold;
 	text-align: left;

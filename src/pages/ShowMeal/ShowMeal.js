@@ -29,15 +29,16 @@ export default function ShowMeal(props) {
 
 	if (loading) return <LoadingBar />
 	return (
-		<div className='wrapper'>
+		<div className={styles.wrapper}>
 			<div
-				className='container'
+				className={styles.containerTitle}
 				style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
 				<button
+					className={styles.backBtn}
 					onClick={() => {
 						navigate('/')
 					}}>
-					Wróc
+					Wróć
 				</button>
 				<h3 className={styles.titleMeal}>{meal.title}</h3>
 				<img src={meal.img} />

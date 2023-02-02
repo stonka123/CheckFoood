@@ -11,7 +11,7 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	background-color: #ffffff;
 	margin: 0 auto;
-	max-width: 1200px;
+	max-width: 1000px;
 }
 
 .body-dark {
@@ -46,4 +46,17 @@ code {
 :root {
 	--main-color: #85bd3a;
 	--hover-color: #669727;
+}
+
+@media (min-width: 1200px) {
+	body {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+	}
+	.App {
+		width: 100vw;
+		max-width: 1000px;
+	}
 }

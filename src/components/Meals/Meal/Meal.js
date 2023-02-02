@@ -65,7 +65,7 @@ function Meal(props) {
 				<ThemeContext.Consumer>
 					{value => (
 						<div className={styles.bottom}>
-							<Link to={`/przepisy/${props.id}`} className={`btn btn-secondary m-1 ${styles.btnShow} text-${value}`}>
+							<Link to={`/przepisy/${props.id}`} className={styles.btnShow}>
 								Pokaż
 							</Link>
 							{/* <a href='/meals/id' className={`btn btn-secondary m-1 ${styles.btnShow} text-${value}`}>

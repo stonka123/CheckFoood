@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import axios from 'axios'
 import AuthContext from '../../../../context/authContext'
 import { useNavigate } from 'react-router-dom'
+import styles from './Register.module.css'
 
 function Register(props) {
 	const navigate = useNavigate()
@@ -9,52 +10,75 @@ function Register(props) {
 	const [form, setForm] = useState({
 		email: '',
 		password: '',
+		passwordCheck: '',
 	})
-	console.log(setAuth.isAuthenticated)
+	const [error, setError] = useState(false)
 	const submit = async e => {
 		e.preventDefault()
-		console.log(form.password)
-		try {
-			const res = await axios.post(
-				'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBtyscHg5E2rywp1O7-AFbl7FZ-6RzVclI',
-				{
-					email: form.email,
-					password: form.password,
-					returnSecureToken: true,
-				}
-			)
-			setAuth.login()
-			navigate('/')
-		} catch (ex) {
-			console.log(ex.response)
+		if (form.password === form.passwordCheck) {
+			try {
+				const res = await axios.post(
+					'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBtyscHg5E2rywp1O7-AFbl7FZ-6RzVclI',
+					{
+						email: form.email,
+						password: form.password,
+						returnSecureToken: true,
+					}
+				)
+				setAuth.login()
+				navigate('/')
+				setError(false)
+			} catch (ex) {
+				console.log(ex.response)
+			}
+		} else {
+			setError(true)
 		}
 	}
 
 	return (
-		<div className='card'>
-			<div className='card-header'>Rejestracja</div>
-			<h3>Rejestracja</h3>
-			<form onSubmit={submit}>
-				<div className='form-group mt-2'>
-					<label>Emaiil</label>
-					<input
-						type='email'
-						value={form.email}
-						onChange={e => setForm({ ...form, email: e.target.value })}
-						className='form-control  mt-2'
-					/>
+		<div className='wrapper'>
+			<div className={styles.container}>
+				<div>
+					<h3>Rejestracja</h3>
+					<p>Zarejestruj się aby dostać możliwość dodawania i zapisywania swoich wymarzonych przepisów!</p>
+					<form onSubmit={submit} className={styles.form}>
+						<div className={styles.box}>
+							<label className={styles.label}>E-mail</label>
+							<input
+								placeholder='Podaj email...'
+								type='email'
+								value={form.email}
+								onChange={e => setForm({ ...form, email: e.target.value })}
+								className={styles.input}
+								required
+							/>
+						</div>
+						<div className={styles.box}>
+							<label className={styles.label}>Hasło</label>
+							<input
+								type='password'
+								value={form.password1}
+								onChange={e => setForm({ ...form, password: e.target.value })}
+								className={styles.input}
+								placeholder='Podaj hasło...'
+								required
+							/>
+							<label className={styles.label}>Powtórz hasło</label>
+							<input
+								type='password'
+								value={form.password2}
+								onChange={e => setForm({ ...form, passwordCheck: e.target.value })}
+								className={styles.input}
+								placeholder='Powtórz hasło'
+								required
+							/>
+						</div>
+						{error ? <p>Złe hasło</p> : null}
+						<button className={styles.btnSend}>Zarejestruj</button>
+					</form>
 				</div>
-				<div className='form-group  mt-2'>
-					<label>Hasło</label>
-					<input
-						type='password'
-						value={form.password}
-						onChange={e => setForm({ ...form, password: e.target.value })}
-						className='form-control  mt-2'
-					/>
-				</div>
-				<button className='btn btn-primary mt-4'>przesli</button>
-			</form>
+			</div>
 		</div>
 	)
 }

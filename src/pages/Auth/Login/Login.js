@@ -2,6 +2,7 @@ import React, { useRef, useState, useContext } from 'react'
 import axios from 'axios'
 import AuthContext from '../../../context/authContext'
 import { useNavigate } from 'react-router-dom'
+import styles from './Login.module.css'
 function Login(props) {
 	const setAuth = useContext(AuthContext)
 	const navigate = useNavigate()
@@ -31,38 +32,43 @@ function Login(props) {
 		}
 	}
 	return (
-		<div>
-			<h3>Logowanie</h3>
-			<form onSubmit={submit}>
-				<div className='form-group mt-2'>
-					<label>Email</label>
-					<input
-						type='email'
-						valueDefault={email}
-						onChange={e => {
-							setEmail(e.target.value)
-						}}
-						className='form-control  mt-2'
-					/>
+		<div className='wrapper'>
+			<div className={styles.container}>
+				<div>
+					<h3>Logowanie</h3>
+					<p>Zaloguj się do swojego profilu w CheckFood</p>
+					<form onSubmit={submit} className={styles.form}>
+						<div className={styles.box}>
+							<label className={styles.label}>E-mail</label>
+							<input
+								type='email'
+								valueDefault={email}
+								onChange={e => {
+									setEmail(e.target.value)
+								}}
+								className={styles.input}
+								placeholder='Podaj e-mail'
+							/>
+						</div>
+						<div className={styles.box}>
+							<label className={styles.label}>Hasło</label>
+							<input
+								type='password'
+								valueDefault={password}
+								onChange={e => setPassword(e.target.value)}
+								className={styles.input}
+								placeholder='Wpisz hasło'
+							/>
+						</div>
+						{error ? (
+							<div>
+								<p>{error}</p>
+							</div>
+						) : null}
+						<button className={styles.btnSend}>Zaloguj</button>
+					</form>
 				</div>
-				<div className='form-group  mt-2'>
-					<label>Hasło</label>
-					<input
-						type='password'
-						valueDefault={password}
-						onChange={e => setPassword(e.target.value)}
-						className='form-control  mt-2'
-					/>
-				</div>
-				{error ? (
-					<div>
-						<p>{error}</p>
-					</div>
-				) : null}
-				<button className='btn btn-primary mt-4' onClick={submit}>
-					Zapisz
-				</button>
-			</form>
+			</div>
 		</div>
 	)
 }

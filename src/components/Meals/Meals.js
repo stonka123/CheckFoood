@@ -24,11 +24,13 @@ function Meals(props) {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.containerMeals}>
-				<p
-					className={styles.text}
-					style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
-					Przepisy:
-				</p>
+				<div className={styles.box}>
+					<h3
+						className={styles.text}
+						style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
+						Przepisy:
+					</h3>
+				</div>
 
 				{filteredData.map(meal => (
 					<li key={meal.id}>

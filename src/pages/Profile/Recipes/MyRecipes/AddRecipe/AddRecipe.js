@@ -3,6 +3,7 @@ import { useState, useRef, createElement, createContext, useContext } from 'reac
 import { useNavigate } from 'react-router-dom'
 import styles from './AddRecipe.module.css'
 import { RecipeContext, RecipeDispatchContext } from '../../../../../context/RecipeContext'
+import axios from 'axios'
 
 function AddRecipe(props) {
 	const navigate = useNavigate()
@@ -13,25 +14,29 @@ function AddRecipe(props) {
 	const [form, setForm] = useState({
 		id: 4,
 		title: '',
-		rating: '',
+		rating: 5,
 		calories: '',
 		time: '',
-		difficulty: 'Easy',
+		difficulty: 'Łatwy',
 		img: 'https://cdn.pixabay.com/photo/2016/08/07/15/34/do-not-take-photos-1576438_960_720.png',
 	})
 
 	const submit = async e => {
 		e.preventDefault()
-
-		const obj = {
-			id: nextId++,
-			title: form.title,
-			time: form.time,
-			calories: form.calories,
-			difficulty: form.difficulty,
-			img: form.img,
+		try {
+			await axios.post('https://checkfood-69493-default-rtdb.europe-west1.firebasedatabase.app/recipes.json', {
+				title: form.title,
+				time: form.time,
+				calories: form.calories,
+				difficulty: form.difficulty,
+				img: form.img,
+				rating: 5,
+				recipe: form.composition,
+			})
+		} catch (ex) {
+			console.log(ex.response)
 		}
-		handleAddRecipe(obj)
+
 		navigate('/')
 	}
 
@@ -89,9 +94,9 @@ function AddRecipe(props) {
 							value={form.difficulty}
 							name=''
 							id=''>
-							<option value='Easy'>Easy</option>
-							<option value='Medium'>Medium</option>
-							<option value='Hard'>Hard</option>
+							<option value='Łatwy'>Łatwy</option>
+							<option value='Średni'>Średni</option>
+							<option value='Trudny'>Trudny</option>
 						</select>
 					</div>
 					<div className={styles.box}>

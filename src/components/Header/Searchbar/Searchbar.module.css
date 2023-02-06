@@ -21,6 +21,9 @@
 }
 
 .button {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
 	background: var(--mainColor);
 	border: 2px solid var(--mainColor);
 	padding: 0.7em 1em;
@@ -33,4 +36,7 @@
 .button:hover {
 	background-color: #fff;
 	color: var(--mainColor);
+}
+.icon {
+	margin: 0 0.2em;
 }

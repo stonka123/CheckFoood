@@ -21,21 +21,35 @@ import useWebsiteTitle from './context/useWebsiteTitle'
 import AddRecipe from './pages/Profile/Recipes/MyRecipes/AddRecipe/AddRecipe'
 import { RecipeContext, RecipeDispatchContext } from './context/RecipeContext'
 import Register from './pages/Auth/Login/Register/Register'
+import axios from 'axios'
 
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [isDarkMode, setIsDarkMode] = useState(false)
 	const [searchTerm, setSearchTerm] = useState('')
-
 	const setTitle = useWebsiteTitle()
 	setTitle('Strona główna')
+	const [visible, setVisible] = useState(false)
+	const [recipes, setRecipes] = useState([])
+
+	const fetchRecipes = async () => {
+		try {
+			const res = await axios.get('https://checkfood-69493-default-rtdb.europe-west1.firebasedatabase.app/recipes.json')
+			const newRecipes = []
+			for (const key in res.data) {
+				newRecipes.push({ ...res.data[key], id: key })
+			}
+			setRecipes(newRecipes)
+			dispatch({ type: 'set-meals', meals: recipes })
+		} catch (ex) {
+			console.log(ex.response)
+		}
+	}
 
 	useEffect(() => {
-		setTimeout(() => {
-			dispatch({ type: 'set-loading', loading: false })
-			dispatch({ type: 'set-meals', meals: dataMeals })
-		}, 1000)
-	}, [])
+		fetchRecipes()
+		dispatch({ type: 'set-loading', loading: false })
+	}, [recipes])
 
 	const changeTheme = () => {
 		const body = document.getElementsByTagName('body')
@@ -66,19 +80,15 @@ function App() {
 	const handleAddRecipe = meals => {
 		dispatch({ type: 'added-recipe', meals })
 	}
-	const initialState = { namek: 'jasny', meals: dataMeals, loading: true }
+	const initialState = { namek: 'jasny', meals: recipes, loading: true }
 
 	const [state, dispatch] = useReducer(reducer, initialState)
-	console.log(state.meals)
 
 	const content = (
 		<>
 			<Routes>
 				<Route path='/przepisy/:id' element={<ShowMeal state={state} />} />
-				<Route
-					path='profil/ulubione/dodaj'
-					element={isAuthenticated ? <AddRecipe state={state} /> : <p>zaloguj sie!</p>}
-				/>
+				<Route path='profil/ulubione/dodaj' element={isAuthenticated ? <AddRecipe state={state} /> : <Login />} />
 				<Route path='/profil/*' element={isAuthenticated ? <Profile /> : <Navigate to='/zaloguj' />} />
 				<Route path='/rejestracja/*' element={<Register />} />
 				<Route path='/zaloguj/*' element={<Login />} />

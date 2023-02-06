@@ -5,6 +5,7 @@ import styles from './Meals.module.css'
 import ThemeContext from '../../context/ThemeContext'
 import { addRecipe } from '../../pages/Profile/Recipes/MyRecipes/AddRecipe/AddRecipe'
 import { addRecipeContext, RecipeContext } from '../../context/RecipeContext'
+import BtnTop from '../UI/LoadingBar/BtnTop/BtnTop'
 
 function Meals(props) {
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
@@ -37,7 +38,7 @@ function Meals(props) {
 						<Meal {...meal} state={props.state} theme={props.theme} />
 					</li>
 				))}
-
+				<BtnTop />
 				<p>{props.state.namek}</p>
 			</div>
 		</div>

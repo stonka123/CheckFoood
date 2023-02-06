@@ -28,9 +28,10 @@ function Login(props) {
 			navigate('/')
 		} catch (ex) {
 			setError(ex.response.data.error.message)
-			console.log(ex.response)
+			console.log(error)
 		}
 	}
+
 	return (
 		<div className='wrapper'>
 			<div className={styles.container}>
@@ -62,7 +63,7 @@ function Login(props) {
 						</div>
 						{error ? (
 							<div>
-								<p>{error}</p>
+								<p>Błędne dane do logowania.</p>
 							</div>
 						) : null}
 						<button className={styles.btnSend}>Zaloguj</button>

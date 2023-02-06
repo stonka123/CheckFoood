@@ -3,7 +3,7 @@ import { useState, useContext, useRef, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import ThemeContext from '../../../context/ThemeContext'
 import { useNavigate } from 'react-router-dom'
-
+import { AiOutlineSearch } from 'react-icons/ai'
 function Searchbar(props) {
 	const [term, setTerm] = useState('')
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
@@ -37,6 +37,7 @@ function Searchbar(props) {
 			<ThemeContext.Consumer>
 				{value => (
 					<button onClick={search} className={styles.button}>
+						<AiOutlineSearch className={styles.icon} />
 						Szukaj
 					</button>
 				)}

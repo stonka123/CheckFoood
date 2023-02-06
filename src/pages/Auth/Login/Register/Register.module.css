@@ -73,6 +73,7 @@
 	border-radius: 10px;
 	transition: background-color 0.4s;
 	background-color: var(--main-color);
+	cursor: pointer;
 }
 .btnSend:hover {
 	background-color: #cfcfcf;

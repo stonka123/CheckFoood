@@ -1,6 +1,5 @@
 export const dataMeals = [
 	{
-		id: 0,
 		title: 'Łosoś po norwesku',
 		rating: 4.2,
 		calories: 150,
@@ -11,7 +10,6 @@ export const dataMeals = [
 		img: 'https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_960_720.jpg',
 	},
 	{
-		id: 1,
 		title: 'Polędwica w szparagach',
 		rating: 4.7,
 		calories: 430,
@@ -22,7 +20,6 @@ export const dataMeals = [
 		img: 'https://cdn.pixabay.com/photo/2017/03/23/19/57/asparagus-2169305_960_720.jpg',
 	},
 	{
-		id: 2,
 		title: 'Omlet z bananem',
 		rating: 4.1,
 		calories: 280,
@@ -33,7 +30,6 @@ export const dataMeals = [
 		img: 'https://cdn.pixabay.com/photo/2017/06/16/18/35/tarte-2409958_960_720.jpg',
 	},
 	{
-		id: 3,
 		title: 'Chleb po swojsku',
 		rating: 3.4,
 		calories: 420,

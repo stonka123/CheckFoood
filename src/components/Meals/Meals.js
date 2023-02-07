@@ -10,7 +10,6 @@ import BtnTop from '../UI/LoadingBar/BtnTop/BtnTop'
 function Meals(props) {
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
 	const { state, searchTerm } = useContext(RecipeContext)
-
 	const filteredData = state.meals.filter(el => {
 		if (searchTerm === '') {
 			return (

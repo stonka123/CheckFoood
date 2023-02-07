@@ -4,12 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import styles from './AddRecipe.module.css'
 import { RecipeContext, RecipeDispatchContext } from '../../../../../context/RecipeContext'
 import axios from 'axios'
-
+import ThemeContext from '../../../../../context/ThemeContext'
 function AddRecipe(props) {
 	const navigate = useNavigate()
 	const imageRef = useRef()
 	const [loading, setLoading] = useState(false)
 	const { handleAddRecipe } = useContext(RecipeContext)
+	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
 
 	const [form, setForm] = useState({
 		id: 4,
@@ -42,7 +43,9 @@ function AddRecipe(props) {
 
 	return (
 		<div className={styles.wrapper}>
-			<div className={styles.containerTitle}>
+			<div
+				className={styles.containerTitle}
+				style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
 				<h3>Nowy Przepis</h3>
 				<form onSubmit={submit}>
 					<div className={styles.box}>

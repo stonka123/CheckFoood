@@ -3,10 +3,11 @@ import axios from 'axios'
 import AuthContext from '../../../../context/authContext'
 import { useNavigate } from 'react-router-dom'
 import styles from './Register.module.css'
-
+import ThemeContext from '../../../../context/ThemeContext'
 function Register(props) {
 	const navigate = useNavigate()
 	const setAuth = useContext(AuthContext)
+	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
 	const [form, setForm] = useState({
 		email: '',
 		password: '',
@@ -38,7 +39,9 @@ function Register(props) {
 
 	return (
 		<div className='wrapper'>
-			<div className={styles.container}>
+			<div
+				className={styles.container}
+				style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
 				<div>
 					<h3>Rejestracja</h3>
 					<p>Zarejestruj się aby dostać możliwość dodawania i zapisywania swoich wymarzonych przepisów!</p>

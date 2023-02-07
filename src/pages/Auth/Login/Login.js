@@ -3,7 +3,9 @@ import axios from 'axios'
 import AuthContext from '../../../context/authContext'
 import { useNavigate } from 'react-router-dom'
 import styles from './Login.module.css'
+import ThemeContext from '../../../context/ThemeContext'
 function Login(props) {
+	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
 	const setAuth = useContext(AuthContext)
 	const navigate = useNavigate()
 	const emailRef = useRef()
@@ -34,7 +36,9 @@ function Login(props) {
 
 	return (
 		<div className='wrapper'>
-			<div className={styles.container}>
+			<div
+				className={styles.container}
+				style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
 				<div>
 					<h3>Logowanie</h3>
 					<p>Zaloguj się do swojego profilu w CheckFood</p>

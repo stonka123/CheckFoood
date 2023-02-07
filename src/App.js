@@ -29,7 +29,6 @@ function App() {
 	const [searchTerm, setSearchTerm] = useState('')
 	const setTitle = useWebsiteTitle()
 	setTitle('Strona główna')
-	const [visible, setVisible] = useState(false)
 	const [recipes, setRecipes] = useState([])
 
 	const fetchRecipes = async () => {
@@ -41,6 +40,7 @@ function App() {
 			}
 			setRecipes(newRecipes)
 			dispatch({ type: 'set-meals', meals: recipes })
+			dispatch({ type: 'set-loading', loading: false })
 		} catch (ex) {
 			console.log(ex.response)
 		}
@@ -80,8 +80,8 @@ function App() {
 	const handleAddRecipe = meals => {
 		dispatch({ type: 'added-recipe', meals })
 	}
-	const initialState = { namek: 'jasny', meals: recipes, loading: true }
 
+	const initialState = { namek: 'jasny', meals: recipes, loading: true }
 	const [state, dispatch] = useReducer(reducer, initialState)
 
 	const content = (

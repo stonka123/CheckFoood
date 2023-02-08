@@ -34,6 +34,7 @@ function Meals(props) {
 						<Meal {...meal} state={props.state} theme={props.theme} />
 					</li>
 				))}
+
 				<BtnTop />
 			</div>
 		</div>

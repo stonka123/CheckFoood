@@ -1,6 +1,14 @@
+.box {
+	position: fixed;
+	bottom: 3%;
+
+	background-color: red;
+	width: 100%;
+	max-width: 1000px;
+}
 .btn {
 	display: flex;
-	position: fixed;
+	position: absolute;
 	bottom: 3%;
 	right: 3%;
 	align-items: center;

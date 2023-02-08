@@ -23,7 +23,7 @@ import axios from 'axios'
 import Settings from './pages/Profile/Settings/Settings'
 
 function App() {
-	const [isAuthenticated, setIsAuthenticated] = useState(true)
+	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [isDarkMode, setIsDarkMode] = useState(false)
 	const [searchTerm, setSearchTerm] = useState('')
 	const setTitle = useWebsiteTitle()
@@ -87,6 +87,7 @@ function App() {
 				<Route path='/rejestracja/*' element={<Register />} />
 				<Route path='/zaloguj/*' element={<Login />} />
 				<Route path='/' element={state.loading ? <LoadingBar /> : <Meals state={state} />} end />
+				<Route path='/CheckFoood' element={state.loading ? <LoadingBar /> : <Meals state={state} />} end />
 				<Route path='/*' element={<NotFound />} />
 			</Routes>
 		</>

@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/CheckFoood/static/css/main.09f71905.css",
+    "main.js": "/CheckFoood/static/js/main.32ad42e6.js",
+    "static/js/787.64c83756.chunk.js": "/CheckFoood/static/js/787.64c83756.chunk.js",
+    "index.html": "/CheckFoood/index.html",
+    "main.09f71905.css.map": "/CheckFoood/static/css/main.09f71905.css.map",
+    "main.32ad42e6.js.map": "/CheckFoood/static/js/main.32ad42e6.js.map",
+    "787.64c83756.chunk.js.map": "/CheckFoood/static/js/787.64c83756.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.09f71905.css",
+    "static/js/main.32ad42e6.js"
+  ]
+}

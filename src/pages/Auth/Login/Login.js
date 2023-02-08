@@ -46,7 +46,7 @@ function Login(props) {
 							<label className={styles.label}>E-mail</label>
 							<input
 								type='email'
-								valueDefault={email}
+								value={email}
 								onChange={e => {
 									setEmail(e.target.value)
 								}}
@@ -58,7 +58,7 @@ function Login(props) {
 							<label className={styles.label}>Hasło</label>
 							<input
 								type='password'
-								valueDefault={password}
+								value={password}
 								onChange={e => setPassword(e.target.value)}
 								className={styles.input}
 								placeholder='Wpisz hasło'

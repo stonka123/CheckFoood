@@ -1,10 +1,9 @@
 .box {
 	position: fixed;
 	bottom: 3%;
-
-	background-color: red;
 	width: 100%;
 	max-width: 1000px;
+	z-index: 20;
 }
 .btn {
 	display: flex;
@@ -16,7 +15,6 @@
 	width: 40px;
 	height: 40px;
 	background-color: #edeff1;
-	z-index: 20;
 	border-radius: 50%;
 	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
 	cursor: pointer;

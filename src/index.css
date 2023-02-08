@@ -42,6 +42,7 @@ code {
 	position: relative;
 	max-width: 1200px;
 	height: 100%;
+	min-height: 100vh;
 }
 :root {
 	--main-color: #85bd3a;

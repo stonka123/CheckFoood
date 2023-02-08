@@ -3,29 +3,38 @@ import { BrowserRouter as Router, Routes, Route, Link, Outlet, NavLink, useMatch
 import styles from './Profile.module.css'
 import MyRecipes from './Recipes/MyRecipes/MyRecipes'
 import ThemeContext from '../../context/ThemeContext'
+import Settings from './Settings/Settings'
 function Profile(props) {
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
-	return (
-		<div>
-			<div style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
-				<div className='card-header'>
-					<h2>Moje przepisy!</h2>
-				</div>
 
-				<div className='card-body'>
-					<ul className='nav nav-tabs'>
-						<li className='nav-item'>
-							<Link className='nav-link' to='/profil/ulubione'>
+	let activeStyle = {
+		backgroundColor: '#fff',
+		color: '#2b2b2b',
+		fontWeight: 'bold',
+	}
+	return (
+		<div className={styles.wrapper}>
+			<div
+				className={styles.container}
+				style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
+				<h3>Mój profil</h3>
+				<div className={styles.menu}>
+					<ul>
+						<li>
+							<NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} to='/profil/ulubione'>
 								Przepisy
-							</Link>
+							</NavLink>
+							<NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} to='/profil/ustawienia'>
+								Ustawienia
+							</NavLink>
 						</li>
-						<Outlet />
 					</ul>
-					<div className='pt-4'>
-						<Routes>
-							<Route path='/ulubione' element={<MyRecipes />} />
-						</Routes>
-					</div>
+				</div>
+				<div>
+					<Routes>
+						<Route path='/ulubione' element={<MyRecipes />} />
+						<Route path='/ustawienia' element={<Settings />} />
+					</Routes>
 				</div>
 			</div>
 		</div>

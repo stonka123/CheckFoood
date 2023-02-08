@@ -20,7 +20,22 @@ form {
 	font-weight: bold;
 	align-self: flex-start;
 	margin-left: 1em;
-	padding: 1em;
+}
+.containerTitle h3 {
+	position: relative;
+	align-self: flex-start;
+	margin: 1em 1em 0.5em;
+}
+.containerTitle h3::before {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: -5px;
+	content: '';
+	width: 3px;
+	height: 100%;
+	margin-right: 1em;
+	background-color: var(--main-color);
 }
 .label {
 	display: flex;

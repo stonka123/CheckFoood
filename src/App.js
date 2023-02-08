@@ -7,24 +7,23 @@ import Menu from './components/Menu/Menu'
 import Meals from './components/Meals/Meals'
 import LoadingBar from './components/UI/LoadingBar/LoadingBar'
 import ThemeContext from './context/ThemeContext'
-import { dataMeals } from './data/dataMeals'
 import { themeLight, themeDark } from './context/Theme'
 import AuthContext from './context/authContext'
 
 // PAGES
 import ShowMeal from './pages/ShowMeal/ShowMeal'
-import Search from './pages/Search/Search'
 import NotFound from './pages/404/NotFound'
 import Login from './pages/Auth/Login/Login'
 import Profile from '../src/pages/Profile/Profile'
 import useWebsiteTitle from './context/useWebsiteTitle'
 import AddRecipe from './pages/Profile/Recipes/MyRecipes/AddRecipe/AddRecipe'
-import { RecipeContext, RecipeDispatchContext } from './context/RecipeContext'
+import { RecipeContext } from './context/RecipeContext'
 import Register from './pages/Auth/Login/Register/Register'
 import axios from 'axios'
+import Settings from './pages/Profile/Settings/Settings'
 
 function App() {
-	const [isAuthenticated, setIsAuthenticated] = useState(false)
+	const [isAuthenticated, setIsAuthenticated] = useState(true)
 	const [isDarkMode, setIsDarkMode] = useState(false)
 	const [searchTerm, setSearchTerm] = useState('')
 	const setTitle = useWebsiteTitle()
@@ -48,22 +47,20 @@ function App() {
 
 	useEffect(() => {
 		fetchRecipes()
-		dispatch({ type: 'set-loading', loading: false })
 	}, [recipes])
 
 	const changeTheme = () => {
 		const body = document.getElementsByTagName('body')
 		body[0].classList.toggle('body-dark')
 		setIsDarkMode(!isDarkMode)
-		dispatch({ type: 'change-name' })
 	}
 
-	// reducer
+	const handleAddRecipe = meals => {
+		dispatch({ type: 'added-recipe', meals })
+	}
 
 	const reducer = (state, action) => {
 		switch (action.type) {
-			case 'change-name':
-				return { ...state, namek: state.namek === 'jasny' ? 'ciemny' : 'jasny' }
 			case 'set-meals':
 				return { ...state, meals: action.meals }
 			case 'set-loading':
@@ -76,9 +73,6 @@ function App() {
 				throw Error('Unknown action: ' + action.type)
 			}
 		}
-	}
-	const handleAddRecipe = meals => {
-		dispatch({ type: 'added-recipe', meals })
 	}
 
 	const initialState = { namek: 'jasny', meals: recipes, loading: true }
@@ -93,7 +87,7 @@ function App() {
 				<Route path='/rejestracja/*' element={<Register />} />
 				<Route path='/zaloguj/*' element={<Login />} />
 				<Route path='/' element={state.loading ? <LoadingBar /> : <Meals state={state} />} end />
-				<Route path='*' element={<NotFound />} />
+				<Route path='/*' element={<NotFound />} />
 			</Routes>
 		</>
 	)

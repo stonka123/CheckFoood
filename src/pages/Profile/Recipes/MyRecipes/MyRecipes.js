@@ -1,12 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
+import styles from './MyRecipes.module.css'
 function MyRecipes() {
 	return (
-		<div>
+		<div className='wrapper'>
 			<p>Nie masz jeszcze żadnego przepisu</p>
 
-			<Link to='/profil/ulubione/dodaj' className='btn btn-primary'>
+			<Link to='/profil/ulubione/dodaj' className={styles.btnAdd}>
 				Dodaj przepis
 			</Link>
 		</div>

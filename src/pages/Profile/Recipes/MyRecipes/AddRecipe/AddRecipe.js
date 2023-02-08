@@ -1,15 +1,11 @@
-import LoadingBar from '../../../../../components/UI/LoadingBar/LoadingBar'
-import { useState, useRef, createElement, createContext, useContext } from 'react'
+import { useState, useRef, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './AddRecipe.module.css'
-import { RecipeContext, RecipeDispatchContext } from '../../../../../context/RecipeContext'
 import axios from 'axios'
 import ThemeContext from '../../../../../context/ThemeContext'
 function AddRecipe(props) {
 	const navigate = useNavigate()
 	const imageRef = useRef()
-	const [loading, setLoading] = useState(false)
-	const { handleAddRecipe } = useContext(RecipeContext)
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
 
 	const [form, setForm] = useState({

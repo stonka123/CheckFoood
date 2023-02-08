@@ -1,17 +1,33 @@
-import PropTypes from 'prop-types'
 import React, { useState, useContext } from 'react'
 import styles from './Meal.module.css'
-import ThemeContext from '../../../context/ThemeContext'
+
 import { Link } from 'react-router-dom'
 import { AiFillStar, AiFillFire, AiOutlineFieldTime } from 'react-icons/ai'
+import { BiShow } from 'react-icons/bi'
+import { FiBarChart } from 'react-icons/fi'
 function Meal(props) {
 	const checkDifficultySkill = () => {
 		if (props.difficulty === 'Łatwy') {
-			return <div className={styles.difficulty}>{props.difficulty}</div>
+			return (
+				<div className={styles.difficulty}>
+					{props.difficulty}
+					<FiBarChart className={styles.diffIcon} />
+				</div>
+			)
 		} else if (props.difficulty === 'Średni') {
-			return <div className={styles.diffMed}>{props.difficulty}</div>
+			return (
+				<div className={styles.diffMed}>
+					{props.difficulty}
+					<FiBarChart className={styles.diffIcon} />
+				</div>
+			)
 		} else if (props.difficulty === 'Trudny') {
-			return <div className={styles.diffHard}>{props.difficulty}</div>
+			return (
+				<div className={styles.diffHard}>
+					{props.difficulty}
+					<FiBarChart className={styles.diffIcon} />
+				</div>
+			)
 		}
 	}
 
@@ -21,7 +37,6 @@ function Meal(props) {
 
 			<div className={styles.content}>
 				<p className={styles.title}>{props.title}</p>
-
 				<div className={styles.options}>
 					<div className={styles.ratings}>
 						<AiFillStar className={styles.icon} />
@@ -36,27 +51,18 @@ function Meal(props) {
 						<span> {props.time}</span>
 					</div>
 				</div>
-				<ThemeContext.Consumer>
-					{value => (
-						<div className={styles.bottom}>
-							<Link to={`/przepisy/${props.id}`} className={styles.btnShow}>
-								Pokaż
-							</Link>
+				<div className={styles.bottom}>
+					<Link to={`/przepisy/${props.id}`} className={styles.btnShow}>
+						<div className={styles.showBox}>
+							<BiShow className={styles.icon} />
+							Pokaż
 						</div>
-					)}
-				</ThemeContext.Consumer>
+					</Link>
+				</div>
 				{checkDifficultySkill()}
 			</div>
 		</div>
 	)
 }
-Meal.propTypes = {
-	title: PropTypes.string.isRequired,
-	difficulty: PropTypes.string.isRequired,
-	time: PropTypes.string.isRequired,
-	img: PropTypes.string.isRequired,
-	id: PropTypes.string.isRequired,
-	rating: PropTypes.number,
-	calories: PropTypes.string.isRequired,
-}
+
 export default Meal

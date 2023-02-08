@@ -1,10 +1,9 @@
 import { useContext } from 'react'
-import PropTypes from 'prop-types'
 import Meal from './Meal/Meal'
 import styles from './Meals.module.css'
 import ThemeContext from '../../context/ThemeContext'
-import { addRecipe } from '../../pages/Profile/Recipes/MyRecipes/AddRecipe/AddRecipe'
-import { addRecipeContext, RecipeContext } from '../../context/RecipeContext'
+
+import { RecipeContext } from '../../context/RecipeContext'
 import BtnTop from '../UI/LoadingBar/BtnTop/BtnTop'
 
 function Meals(props) {
@@ -24,13 +23,11 @@ function Meals(props) {
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.containerMeals}>
-				<div className={styles.box}>
-					<h3
-						className={styles.text}
-						style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
-						Przepisy:
-					</h3>
-				</div>
+				<h3
+					className={styles.text}
+					style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
+					Przepisy:
+				</h3>
 
 				{filteredData.map(meal => (
 					<li key={meal.id}>
@@ -38,7 +35,6 @@ function Meals(props) {
 					</li>
 				))}
 				<BtnTop />
-				<p>{props.state.namek}</p>
 			</div>
 		</div>
 	)

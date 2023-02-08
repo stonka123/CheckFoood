@@ -31,6 +31,7 @@ function Register(props) {
 				setError(false)
 			} catch (ex) {
 				console.log(ex.response)
+				setError(true)
 			}
 		} else {
 			setError(true)
@@ -77,7 +78,11 @@ function Register(props) {
 								required
 							/>
 						</div>
-						{error ? <p>Złe hasło</p> : null}
+						{error ? (
+							<p className={styles.error}>Popraw dane do rejestracji.</p>
+						) : (
+							<p className={styles.errorShow}>Popraw dane do rejestracji.</p>
+						)}
 						<button className={styles.btnSend}>Zarejestruj</button>
 					</form>
 				</div>

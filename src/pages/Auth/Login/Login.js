@@ -8,7 +8,6 @@ function Login(props) {
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
 	const setAuth = useContext(AuthContext)
 	const navigate = useNavigate()
-	const emailRef = useRef()
 	const [loading, setLoading] = useState(false)
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
@@ -67,9 +66,13 @@ function Login(props) {
 						</div>
 						{error ? (
 							<div>
-								<p>Błędne dane do logowania.</p>
+								<p className={styles.error}>Błędne dane do logowania.</p>
 							</div>
-						) : null}
+						) : (
+							<div>
+								<p className={styles.errorShow}>Błędne dane do logowania.</p>
+							</div>
+						)}
 						<button className={styles.btnSend}>Zaloguj</button>
 					</form>
 				</div>

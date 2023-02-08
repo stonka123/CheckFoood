@@ -15,21 +15,43 @@
 .containerTitle img {
 	width: 80%;
 }
+.containerTitle h3 {
+	position: relative;
+
+	margin: 1em 1em 0.5em;
+}
+.containerTitle h3::before {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: -5px;
+	content: '';
+	width: 3px;
+	height: 100%;
+	margin-right: 1em;
+	background-color: var(--main-color);
+}
 .backBtn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	align-self: flex-start;
 	margin: 1em;
-	font-size: 0.6rem;
 	padding: 0.6em 1.2em;
 	color: rgb(32, 32, 32);
 	border: none;
-	border-radius: 10px;
+	border-radius: 8px;
+	font-weight: bold;
 	transition: background-color 0.4s;
 	font-size: 0.7rem;
+	cursor: pointer;
 }
 .backBtn:hover {
 	background-color: #cfcfcf;
 }
-
+.iconBtn {
+	margin-right: 0.2em;
+}
 .text {
 	font-weight: bold;
 	text-align: left;

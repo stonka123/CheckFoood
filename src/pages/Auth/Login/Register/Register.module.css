@@ -78,3 +78,12 @@
 .btnSend:hover {
 	background-color: #cfcfcf;
 }
+.form .error {
+	color: rgb(197, 76, 76);
+	text-align: center;
+}
+.form .errorShow {
+	color: rgb(197, 76, 76);
+	text-align: center;
+	visibility: hidden;
+}

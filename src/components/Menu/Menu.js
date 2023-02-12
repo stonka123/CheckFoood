@@ -1,21 +1,18 @@
 import React, { useContext, useState } from 'react'
 import styles from './Menu.module.css'
-import AuthContext from '../../context/authContext'
+
 import { Link, NavLink, Outlet } from 'react-router-dom'
 import { CiLogin, CiLogout } from 'react-icons/ci'
 import { CgProfile, CgHome } from 'react-icons/cg'
+import useAuth from '../../hooks/useAuth'
 function Menu() {
 	const [loading, setLoading] = useState(false)
+	const [auth, setAuth] = useAuth()
 
-	const auth = useContext(AuthContext)
-
-	const login = e => {
-		e.preventDefault()
-		auth.login()
-	}
 	const logout = e => {
 		e.preventDefault()
-		auth.logout()
+		setAuth(false)
+	
 	}
 	let activeStyle = {
 		backgroundColor: '#fff',
@@ -32,7 +29,7 @@ function Menu() {
 						<CgHome className={styles.icon} /> Strona główna
 					</NavLink>
 					<div className={styles['profile-box']}>
-						{auth.isAuthenticated ? (
+						{auth ? (
 							<>
 								<NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} to='/profil'>
 									<CgProfile className={styles.icon} />

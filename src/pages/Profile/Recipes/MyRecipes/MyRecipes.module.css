@@ -1,5 +1,5 @@
 .btnAdd {
-	width: 100px;
+	width: 150px;
 	margin-top: 1em;
 	background-color: var(--main-color);
 	color: #fff;
@@ -13,4 +13,77 @@
 .btnAdd:hover {
 	background-color: #fff;
 	color: var(--mainColor);
+}
+/* test@test.pl */
+.delete,
+.edit {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* margin: 1em; */
+	padding: 0.1em 0.6em;
+	color: rgb(32, 32, 32);
+	border-radius: 15px;
+	height: 35px;
+	transition: all 0.4s;
+	font-weight: bold;
+	color: #fff;
+	font-size: 0.5rem;
+}
+.delete {
+	border: 2px solid var(--deleteColor);
+	background-color: var(--deleteColor);
+}
+
+.edit {
+	background: var(--editColor);
+	border: 2px solid var(--editColor);
+}
+.edit:hover {
+	background-color: #fff;
+	color: var(--editColor);
+}
+.delete:hover {
+	background-color: #fff;
+	color: var(--deleteColor);
+}
+.box {
+	display: flex;
+}
+table {
+	width: 100%;
+}
+thead tr th {
+	text-align: left;
+}
+td,
+th {
+	padding: 0.5em;
+	font-size: 0.8rem;
+}
+.box {
+	display: flex;
+	align-items: center;
+}
+
+td {
+	font-size: 0.8rem;
+}
+.headerText {
+	display: inline-block;
+	padding: 0.5em 0.5em;
+	border-bottom: 1px solid gray;
+}
+hr {
+	max-width: 400px;
+	color: rgb(243, 243, 243);
+}
+.icon {
+	margin-right: 0.2em;
+}
+.infoText {
+	font-size: 0.8rem;
+	font-style: italic;
+	color: rgb(53, 53, 53);
+	padding: 1em 0.5em;
 }

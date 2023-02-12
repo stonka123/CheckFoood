@@ -1,0 +1,105 @@
+.wrapper {
+	padding: 1em;
+}
+.containerTitle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	width: 100%;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+	margin: 0 auto;
+}
+form {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+.containerTitle h3 {
+	font-weight: bold;
+	align-self: flex-start;
+	margin-left: 1em;
+}
+.containerTitle h3 {
+	position: relative;
+	align-self: flex-start;
+	margin: 1em 1em 0.5em;
+}
+.containerTitle h3::before {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: -5px;
+	content: '';
+	width: 3px;
+	height: 100%;
+	margin-right: 1em;
+	background-color: var(--main-color);
+}
+.label {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.7em;
+}
+.containerTitle form {
+	width: 100%;
+	padding: 1em;
+}
+
+input,
+textarea,
+select {
+	padding: 0.5em 1em;
+	width: 100%;
+	border-radius: 8px;
+	border: none;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+
+	background-color: rgb(246, 255, 246);
+}
+
+input:focus,
+textarea:focus {
+	outline: none;
+}
+textarea {
+	resize: none;
+	width: 100%;
+}
+.containerTitle button {
+	background-color: var(--main-color);
+	color: white;
+	font-weight: bold;
+	border: none;
+	padding: 1em 1.5em;
+	width: 150px;
+	border-radius: 100px;
+	cursor: pointer;
+	margin: 2em 0;
+}
+.containerTitle button:hover {
+	background-color: var(--hover-color);
+}
+.box {
+	width: 100%;
+}
+.boxSmall {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	width: 100%;
+}
+.box-kcal,
+.box-time {
+	width: 25%;
+}
+
+.label-time,
+.label-kcal {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0.7em;
+}

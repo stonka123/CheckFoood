@@ -1,12 +1,13 @@
 import { useContext, useState } from 'react'
 import axios from 'axios'
-import AuthContext from '../../../../context/authContext'
+import AuthContext from '../../../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import styles from './Register.module.css'
 import ThemeContext from '../../../../context/ThemeContext'
+import useAuth from '../../../../hooks/useAuth'
 function Register(props) {
 	const navigate = useNavigate()
-	const setAuth = useContext(AuthContext)
+	const [auth, setAuth] = useAuth()
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
 	const [form, setForm] = useState({
 		email: '',
@@ -26,7 +27,11 @@ function Register(props) {
 						returnSecureToken: true,
 					}
 				)
-				setAuth.login()
+				setAuth({
+					email: res.data.email,
+					token: res.data.idToken,
+					userId: res.data.localId,
+				})
 				navigate('/')
 				setError(false)
 			} catch (ex) {

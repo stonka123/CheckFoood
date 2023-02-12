@@ -8,12 +8,16 @@
 	background-color: rgb(150, 150, 150);
 	border-top: 2px solid var(--mainColor);
 	padding: 1em;
+	font-size: 0.8rem;
+	font-weight: bold;
+	color: rgb(70, 70, 70);
 }
 
 .footerText {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	height: 100%;
 	flex-direction: row;
 	width: 100%;
 	text-transform: uppercase;

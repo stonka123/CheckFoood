@@ -1,29 +1,35 @@
-import { useState, useRef, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
-import styles from './AddRecipe.module.css'
+import { useState, useRef, useContext, useEffect, StrictMode } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
+import styles from './EditRecipe.module.css'
 import axios from 'axios'
 import ThemeContext from '../../../../../context/ThemeContext'
 import useAuth from '../../../../../hooks/useAuth'
-function AddRecipe(props) {
+import LoadingBar from '../../../../../components/UI/LoadingBar/LoadingBar'
+// test@test.pl
+
+function EditRecipe(props) {
+	const { id } = useParams()
 	const navigate = useNavigate()
 	const imageRef = useRef()
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
 	const [auth] = useAuth()
+	const [przepis, setPrzepis] = useState(null)
+	const [loading, setLoading] = useState(false)
 	const [form, setForm] = useState({
 		id: 4,
 		title: '',
 		rating: 5,
 		calories: '',
 		time: '',
-		recipe: '',
 		difficulty: 'Łatwy',
+		composition: '',
 		img: 'https://cdn.pixabay.com/photo/2016/08/07/15/34/do-not-take-photos-1576438_960_720.png',
 	})
 
 	const submit = async e => {
 		e.preventDefault()
 		try {
-			await axios.post('https://checkfood-69493-default-rtdb.europe-west1.firebasedatabase.app/recipes.json', {
+			await axios.patch(`https://checkfood-69493-default-rtdb.europe-west1.firebasedatabase.app/recipes/${id}.json`, {
 				title: form.title,
 				time: form.time,
 				calories: form.calories,
@@ -39,13 +45,32 @@ function AddRecipe(props) {
 
 		navigate('/')
 	}
+	const fetchRecipe = async () => {
+		const res = await axios.get(
+			`https://checkfood-69493-default-rtdb.europe-west1.firebasedatabase.app/recipes/${id}.json`
+		)
+		setPrzepis(res.data)
+	}
+	useEffect(() => {
+		const newForm = { ...form }
+		for (const key in przepis) {
+			newForm[key] = przepis[key]
+		}
+		setForm(newForm)
+		setLoading(false)
+	}, [przepis])
+
+	useEffect(() => {
+		fetchRecipe()
+		setLoading(true)
+	}, [])
 
 	return (
 		<div className={styles.wrapper}>
 			<div
 				className={styles.containerTitle}
 				style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
-				<h3>Nowy Przepis</h3>
+				<h3>Edytuj Przepis</h3>
 				<form onSubmit={submit}>
 					<div className={styles.box}>
 						<label className={styles.label}>Nazwa potrawy</label>
@@ -104,10 +129,10 @@ function AddRecipe(props) {
 					<div className={styles.box}>
 						<label className={styles.label}>Zdjęcie</label>
 						<input
-							src={e => setForm({ ...form, img: e.target.value })}
+							// src={e => setForm({ ...form, img: e.target.value })}
+							value={form.img}
 							type='text'
 							onChange={e => setForm({ ...form, img: e.target.value })}
-							ref={imageRef}
 							placeholder='Link do zdjęcia...'
 						/>
 					</div>
@@ -121,4 +146,4 @@ function AddRecipe(props) {
 	)
 }
 let nextId = 4
-export default AddRecipe
+export default EditRecipe

@@ -1,19 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, Link } from 'react-router-dom'
 import LoadingBar from '../../components/UI/LoadingBar/LoadingBar'
 import useWebsiteTitle from '../../context/useWebsiteTitle'
 import ThemeContext from '../../context/ThemeContext'
 import styles from './ShowMeal.module.css'
-import { AiOutlineArrowLeft } from 'react-icons/ai'
+import { AiOutlineArrowLeft, AiFillEdit } from 'react-icons/ai'
+import useAuth from '../../hooks/useAuth'
+
 export default function ShowMeal(props) {
 	const navigate = useNavigate()
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
 	const { id } = useParams()
 	const setTitle = useWebsiteTitle()
-
 	const [loading, setLoading] = useState(true)
-
 	const [meal, setMeal] = useState({})
+	const [auth, setAuth] = useAuth()
+	const [showEdit, setShowEdit] = useState(false)
 
 	const findRecipe = () => {
 		setMeal(props.state.meals.find(product => String(product.id) === id))
@@ -21,8 +23,16 @@ export default function ShowMeal(props) {
 		setLoading(false)
 	}
 	useEffect(() => {
+		if (auth != null) {
+			if (auth.userId == meal.user_id) {
+				setShowEdit(true)
+			}
+		}
+	}, [meal])
+
+	useEffect(() => {
 		findRecipe()
-	}, [meal.title])
+	}, [])
 
 	if (loading) return <LoadingBar />
 	return (
@@ -30,14 +40,24 @@ export default function ShowMeal(props) {
 			<div
 				className={styles.containerTitle}
 				style={{ color: isDarkMode ? themeDark.colors.textColor : themeLight.colors.textColor }}>
-				<button
-					className={styles.backBtn}
-					onClick={() => {
-						navigate('/')
-					}}>
-					<AiOutlineArrowLeft className={styles.iconBtn} />
-					Wróć
-				</button>
+				<div className={styles.boxBtn}>
+					<button
+						className={styles.backBtn}
+						onClick={() => {
+							navigate('/')
+						}}>
+						<AiOutlineArrowLeft className={styles.iconBtn} />
+						Wróć
+					</button>
+					<div>
+						{showEdit ? (
+							<Link className={styles.editBtn} to={`/profil/ulubione/edytuj/${meal.id}`}>
+								<AiFillEdit className={styles.iconBtn} />
+								Edytuj
+							</Link>
+						) : null}
+					</div>
+				</div>
 				<h3>{meal.title}</h3>
 				<img src={meal.img} />
 				<div className={styles.infoBox}>

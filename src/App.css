@@ -1,3 +1,6 @@
 :root {
 	--mainColor: #85bd3a;
+	--editColor: #ffc107;
+	--deleteColor: #dc3545;
+	--grayColor: #b1b1b1;
 }

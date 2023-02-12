@@ -24,30 +24,49 @@
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	left: -5px;
+	left: -8px;
 	content: '';
 	width: 3px;
 	height: 100%;
 	margin-right: 1em;
 	background-color: var(--main-color);
 }
-.backBtn {
+.boxBtn {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+.backBtn,
+.editBtn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	align-self: flex-start;
 	margin: 1em;
-	padding: 0.6em 1.2em;
+	padding: 0.5em 1em;
 	color: rgb(32, 32, 32);
-	border: none;
-	border-radius: 8px;
+	border-radius: 15px;
+	height: 30px;
+	transition: all 0.4s;
 	font-weight: bold;
-	transition: background-color 0.4s;
-	font-size: 0.7rem;
-	cursor: pointer;
+	color: #fff;
+}
+.backBtn {
+	border: 2px solid var(--grayColor);
+	background-color: var(--grayColor);
+}
+
+.editBtn {
+	background: var(--editColor);
+	border: 2px solid var(--editColor);
+}
+.editBtn:hover {
+	background-color: #fff;
+	color: var(--editColor);
 }
 .backBtn:hover {
-	background-color: #cfcfcf;
+	background-color: #fff;
+	color: var(--grayColor);
 }
 .iconBtn {
 	margin-right: 0.2em;

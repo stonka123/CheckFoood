@@ -8,7 +8,7 @@ import Meals from './components/Meals/Meals'
 import LoadingBar from './components/UI/LoadingBar/LoadingBar'
 import ThemeContext from './context/ThemeContext'
 import { themeLight, themeDark } from './context/Theme'
-import AuthContext from './context/authContext'
+import AuthContext from './context/AuthContext'
 
 // PAGES
 import ShowMeal from './pages/ShowMeal/ShowMeal'
@@ -17,19 +17,18 @@ import Login from './pages/Auth/Login/Login'
 import Profile from '../src/pages/Profile/Profile'
 import useWebsiteTitle from './context/useWebsiteTitle'
 import AddRecipe from './pages/Profile/Recipes/MyRecipes/AddRecipe/AddRecipe'
+import EditRecipe from './pages/Profile/Recipes/MyRecipes/EditRecipe/EditRecipe'
 import { RecipeContext } from './context/RecipeContext'
 import Register from './pages/Auth/Login/Register/Register'
 import axios from 'axios'
 import Settings from './pages/Profile/Settings/Settings'
 
 function App() {
-	const [isAuthenticated, setIsAuthenticated] = useState(false)
 	const [isDarkMode, setIsDarkMode] = useState(false)
 	const [searchTerm, setSearchTerm] = useState('')
 	const setTitle = useWebsiteTitle()
 	setTitle('Strona główna')
 	const [recipes, setRecipes] = useState([])
-
 	const fetchRecipes = async () => {
 		try {
 			const res = await axios.get('https://checkfood-69493-default-rtdb.europe-west1.firebasedatabase.app/recipes.json')
@@ -68,22 +67,28 @@ function App() {
 			case 'added-recipe': {
 				return { ...state, meals: [...state.meals, action.meals] }
 			}
-
+			case 'login': {
+				return { ...state, user: action.user }
+			}
+			case 'logout': {
+				return { ...state, user: null }
+			}
 			default: {
 				throw Error('Unknown action: ' + action.type)
 			}
 		}
 	}
 
-	const initialState = { namek: 'jasny', meals: recipes, loading: true }
+	const initialState = { meals: recipes, loading: true, user: null }
 	const [state, dispatch] = useReducer(reducer, initialState)
 
 	const content = (
 		<>
 			<Routes>
 				<Route path='/przepisy/:id' element={<ShowMeal state={state} />} />
-				<Route path='profil/ulubione/dodaj' element={isAuthenticated ? <AddRecipe state={state} /> : <Login />} />
-				<Route path='/profil/*' element={isAuthenticated ? <Profile /> : <Navigate to='/zaloguj' />} />
+				<Route path='profil/ulubione/edytuj/:id' element={state.user ? <EditRecipe state={state} /> : <Login />} />
+				<Route path='profil/ulubione/dodaj' element={state.user ? <AddRecipe state={state} /> : <Login />} />
+				<Route path='/profil/*' element={state.user ? <Profile /> : <Navigate to='/zaloguj' />} />
 				<Route path='/rejestracja/*' element={<Register />} />
 				<Route path='/zaloguj/*' element={<Login />} />
 				<Route path='/' element={state.loading ? <LoadingBar /> : <Meals state={state} />} end />
@@ -98,9 +103,9 @@ function App() {
 			<RecipeContext.Provider value={{ state, handleAddRecipe, searchTerm }}>
 				<AuthContext.Provider
 					value={{
-						isAuthenticated: isAuthenticated,
-						login: () => setIsAuthenticated(true),
-						logout: () => setIsAuthenticated(false),
+						user: state.user,
+						login: user => dispatch({ type: 'login', user }),
+						logout: () => dispatch({ type: 'logout', isAuthenticated: false }),
 					}}>
 					<ThemeContext.Provider value={{ themeLight, themeDark, isDarkMode }}>
 						<div className='App'>

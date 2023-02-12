@@ -1,17 +1,19 @@
 import React, { useRef, useState, useContext } from 'react'
 import axios from 'axios'
-import AuthContext from '../../../context/authContext'
+
 import { useNavigate } from 'react-router-dom'
 import styles from './Login.module.css'
 import ThemeContext from '../../../context/ThemeContext'
+import useAuth from '../../../hooks/useAuth'
 function Login(props) {
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
-	const setAuth = useContext(AuthContext)
+	const [auth, setAuth] = useAuth()
 	const navigate = useNavigate()
 	const [loading, setLoading] = useState(false)
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [error, setError] = useState('')
+
 	const submit = async e => {
 		e.preventDefault()
 		setLoading(true)
@@ -24,8 +26,13 @@ function Login(props) {
 					returnSecureToken: true,
 				}
 			)
-			console.log(res)
-			setAuth.login()
+			setAuth({
+				email: res.data.email,
+				token: res.data.idToken,
+				userId: res.data.localId,
+			})
+
+			// 11.9 zaczac
 			navigate('/')
 		} catch (ex) {
 			setError(ex.response.data.error.message)

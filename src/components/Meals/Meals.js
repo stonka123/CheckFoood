@@ -2,7 +2,6 @@ import { useContext } from 'react'
 import Meal from './Meal/Meal'
 import styles from './Meals.module.css'
 import ThemeContext from '../../context/ThemeContext'
-
 import { RecipeContext } from '../../context/RecipeContext'
 import BtnTop from '../UI/LoadingBar/BtnTop/BtnTop'
 

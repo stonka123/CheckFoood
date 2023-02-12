@@ -4,6 +4,7 @@ import styles from './Profile.module.css'
 import MyRecipes from './Recipes/MyRecipes/MyRecipes'
 import ThemeContext from '../../context/ThemeContext'
 import Settings from './Settings/Settings'
+import { AiOutlineSetting, AiOutlineOrderedList } from 'react-icons/ai'
 function Profile(props) {
 	const { themeLight, themeDark, isDarkMode } = useContext(ThemeContext)
 
@@ -22,9 +23,11 @@ function Profile(props) {
 					<ul>
 						<li>
 							<NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} to='/profil/ulubione'>
+								<AiOutlineOrderedList className={styles.icon} />
 								Przepisy
 							</NavLink>
 							<NavLink style={({ isActive }) => (isActive ? activeStyle : undefined)} to='/profil/ustawienia'>
+								<AiOutlineSetting className={styles.icon} />
 								Ustawienia
 							</NavLink>
 						</li>
